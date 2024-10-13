@@ -18,6 +18,7 @@ const AHPPage = () => {
     "brand_past_purchase_or_use_vs_utilitarian_benefits": React.createRef(),
     "emotional_perception_of_the_brand_vs_logo": React.createRef(),
     "emotional_perception_of_the_brand_vs_utilitarian_benefits": React.createRef(),
+    "logo_vs_utilitarian_benefits": React.createRef()
   });
 
   const questions = [
@@ -35,6 +36,7 @@ const AHPPage = () => {
     { id: "brand_past_purchase_or_use_vs_utilitarian_benefits", criteria: ["Brand Past Purchase or Use", "Utilitarian Benefits"] },
     { id: "emotional_perception_of_the_brand_vs_logo", criteria: ["Emotional Perception of the Brand", "Logo"] },
     { id: "emotional_perception_of_the_brand_vs_utilitarian_benefits", criteria: ["Emotional Perception of the Brand", "Utilitarian Benefits"] },
+    { id: "logo_vs_utilitarian_benefits", criteria: ["Logo", "Utilitarian Benefits"]}
   ];
 
   const handleSubmit = async (event) => {

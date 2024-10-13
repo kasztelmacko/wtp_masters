@@ -1,6 +1,8 @@
 from pydantic import BaseModel
 from typing import List, Optional, Union
+from fractions import Fraction
 import json
+import re
 
 class Question(BaseModel):
     question_name: str
@@ -16,7 +18,7 @@ class Question(BaseModel):
     def validate_response(self, response) -> bool:
         raise NotImplementedError
 
-    def return_response(self, response):
+    def validate_serialize_response(self, response):
         if self.validate_response(response):
             serialized_response = self.serialize_response(response)
             return serialized_response
@@ -55,6 +57,21 @@ class InputQuestion(Question):
 class AHPChoiceQuestion(SingleChoiceQuestion):
     criteria: List[str]
 
+    def validate_response(self, response: str) -> bool:
+        response = re.sub('"', "", response)
+        if self.required and response not in self.choices:
+            return False
+        return True
+    
+    def validate_serialize_response(self, response):
+        response = re.sub('"', "", response)
+        if not self.validate_response(response):
+            raise ValueError("Invalid response")
+
+        response_value = Fraction(response)
+        
+        return response_value
+
 
 class OpinionScaleQuestion(Question):
     min_value: int
@@ -68,4 +85,6 @@ class OpinionScaleQuestion(Question):
 class CBCQuestion(Question):
     alternative: int
     profile: int
+    respondent_id: int
+    question_id: int
 

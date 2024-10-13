@@ -146,9 +146,9 @@ function App() {
         setBundleWTP={setBundleWTP}
       />
 
-      <WTPCBCPage 
+      {/* <WTPCBCPage 
         inputRefs={inputRefs}
-      />
+      /> */}
     </div>
   );
 }

@@ -6,11 +6,11 @@ const WTPCBCPage = () => {
     const [questions, setQuestions] = useState([]);
     const [responses, setResponses] = useState({});
     const inputRefs = useRef({});
+    const respondentId = 2;
 
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
-                const respondentId = 2;
                 const response = await axios.get(`http://127.0.0.1:8000/api/cbc-wtp-questions?respondent_id=${respondentId}`);
                 console.log('Fetched questions:', response.data);
                 
@@ -25,7 +25,7 @@ const WTPCBCPage = () => {
         };
 
         fetchQuestions();
-    }, []);
+    }, [respondentId]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -35,13 +35,16 @@ const WTPCBCPage = () => {
             .reduce((acc, question) => {
                 acc[`question_${question.question_id}`] = {
                     question_name: `question_${question.question_id}`,
+                    question_id: question.question_id,
                     question_text: 1,
                     required: true,
                     alternative: question.alternative_id,
-                    profile: question.profile_id
+                    profile: question.profile_id,
+                    respondent_id: respondentId
                 };
                 return acc;
             }, {});
+
 
         try {
             console.log('Payload being sent:', WTPCBCQuestions);

@@ -31,6 +31,8 @@ class AHPQuestions(BaseModel):
     emotional_perception_of_the_brand_vs_logo: AHPChoiceQuestion
     emotional_perception_of_the_brand_vs_utilitarian_benefits: AHPChoiceQuestion
 
+    logo_vs_utilitarian_benefits: AHPChoiceQuestion
+
 class ConsumerBehaviorQuestions(BaseModel):
     frequency_of_fast_food_dining: SingleChoiceQuestion
     monthly_spenditure_on_fast_food: SingleChoiceQuestion
