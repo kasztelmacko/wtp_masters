@@ -2,9 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import InputQuestion from '../questions/InputQuestion';
 
-const WTPDirectPage = ({ inputRefs, burger_wtp, burger_premium_wtp, bundle_wtp, setBurgerWTP, setBurgerPremiumWTP, setBundleWTP }) => {
+const WTPDirectPage = ({ inputRefs, burger_wtp, burger_premium_wtp, bundle_wtp, setBurgerWTP, setBurgerPremiumWTP, setBundleWTP, onSubmit }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
+        onSubmit();
 
         const WTPDirectQuestions = {
             burger_wtp: {

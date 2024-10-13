@@ -2,9 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import MultipleChoiceQuestion from '../questions/MultipleChoiceQuestion';
 
-const MarketAwarenessPage = ({ inputRefs, recognizedCompetitors = [], setRecognizedCompetitors }) => {
+const MarketAwarenessPage = ({ inputRefs, recognizedCompetitors = [], setRecognizedCompetitors, onSubmit }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
+        onSubmit();
 
         const MarketAwarenessQuestions = {
             recognized_competitors: {

@@ -2,9 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import SingleChoiceQuestion from '../questions/SingleChoiceQuestion';
 
-const ConsumerBehaviorPage = ({ inputRefs, frequency_of_fast_food_dining, monthly_spenditure_on_fast_food, setFrequencyOfFastFoodDining, setMonthlySpenditureOnFastFood }) => {
+const ConsumerBehaviorPage = ({ inputRefs, frequency_of_fast_food_dining, monthly_spenditure_on_fast_food, setFrequencyOfFastFoodDining, setMonthlySpenditureOnFastFood, onSubmit }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
+        onSubmit();
 
         const ConsumerBehaviorQuestions = {
             frequency_of_fast_food_dining: {

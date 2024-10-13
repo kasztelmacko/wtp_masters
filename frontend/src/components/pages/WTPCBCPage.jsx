@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import CBCQuestion from '../questions/CBCQuestion';
 
-const WTPCBCPage = () => {
+const WTPCBCPage = ({ onSubmit }) => {
     const [questions, setQuestions] = useState([]);
     const [responses, setResponses] = useState({});
     const inputRefs = useRef({});
@@ -29,6 +29,7 @@ const WTPCBCPage = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        onSubmit();
 
         const WTPCBCQuestions = questions
             .filter(question => responses[question.question_id] === question.profile_id)

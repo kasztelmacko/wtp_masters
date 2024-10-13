@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import axios from 'axios';
 import AHPQuestion from '../questions/AHPQuestion';
 
-const AHPPage = () => {
+const AHPPage = ({ onSubmit }) => {
   const questionRefs = useRef({
     "brand_recognition_vs_brand_recall": React.createRef(),
     "brand_recognition_vs_brand_past_purchase_or_use": React.createRef(),
@@ -41,6 +41,7 @@ const AHPPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    onSubmit();
 
     const questionData = questions.reduce((acc, { id, criteria }) => {
       acc[id] = {

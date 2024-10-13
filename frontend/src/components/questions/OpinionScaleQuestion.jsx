@@ -1,12 +1,13 @@
 import React, { forwardRef } from 'react';
 
-const OpinionScaleQuestion = forwardRef(({ id, value, onChange, required = false, min_value = 0, max_value = 5 }, ref) => {
+const OpinionScaleQuestion = forwardRef(({ id, value, onChange, required = false, min_value, max_value }, ref) => {
     return (
       <div>
         <label htmlFor={id} className="block text-sm font-medium text-gray-700">
           {id.charAt(0).toUpperCase() + id.slice(1)}
         </label>
         <input
+          className="range"
           ref={ref}
           id={id}
           type="range"
@@ -15,7 +16,6 @@ const OpinionScaleQuestion = forwardRef(({ id, value, onChange, required = false
           max={max_value}
           value={value}
           onChange={onChange}
-          className="range"
           step="1"
         />
         <div className="flex justify-between px-2 text-xs">

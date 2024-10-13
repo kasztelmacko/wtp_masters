@@ -1,17 +1,19 @@
 import React, { forwardRef } from 'react';
 
 
-const InputQuestion = forwardRef(({ id, label, value, onChange, type = 'text', required = false }, ref) => {
+const InputQuestion = forwardRef(({ id, label, value, onChange, type = 'text', required = false, placeholder }, ref) => {
   return (
     <div>
       <label htmlFor={id}>{label}</label>
       <input
+        className="input input-bordered w-full max-w-xs"
         ref={ref}
         id={id}
         type={type}
         required={required}
         value={value}
         onChange={onChange}
+        placeholder={placeholder}
       />
     </div>
   );

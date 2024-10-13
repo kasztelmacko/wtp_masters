@@ -2,9 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import InputQuestion from '../questions/InputQuestion';
 
-const GuessPricesPage = ({ inputRefs, burger, burger_premium, bundle, setBurger, setBurgerPremium, setBundle }) => {
+const GuessPricesPage = ({ inputRefs, burger, burger_premium, bundle, setBurger, setBurgerPremium, setBundle, onSubmit }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
+        onSubmit();
 
         const GuessPricesQuestions = {
             burger: {

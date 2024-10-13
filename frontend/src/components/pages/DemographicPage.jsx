@@ -3,10 +3,11 @@ import axios from 'axios';
 import InputQuestion from '../questions/InputQuestion';
 import SingleChoiceQuestion from '../questions/SingleChoiceQuestion';
 
-const DemographicPage = ({ inputRefs, age, gender, income, geolocation, setAge, setGender, setIncome, setGeolocation }) => {
+const DemographicPage = ({ inputRefs, age, gender, income, geolocation, setAge, setGender, setIncome, setGeolocation, onSubmit }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    onSubmit(); 
     const inputQuestions = {
       age: {
         input_type: inputRefs.age.current.type,
@@ -60,6 +61,7 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, setAge, 
           required={true}
           value={age}
           onChange={(e) => setAge(e.target.value)}
+          placeholder="age"
         />
 
         {/* Gender Input as Select */}

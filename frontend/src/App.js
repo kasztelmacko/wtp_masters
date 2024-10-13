@@ -41,6 +41,8 @@ function App() {
   const [burger_premium_wtp, setBurgerPremiumWTP] = useState(0);
   const [bundle_wtp, setBundleWTP] = useState(0);
 
+  const [currentPage, setCurrentPage] = useState(0);
+
 
   const inputRefs = {
     age: useRef(null),
@@ -66,89 +68,122 @@ function App() {
 
   };
 
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
   return (
-    <div>
-      <h1>FastAPI + React</h1>
-      <DemographicPage 
-        inputRefs={inputRefs} 
-        age={age} 
-        gender={gender} 
-        income={income} 
-        geolocation={geolocation} 
-        setAge={setAge} 
-        setGender={setGender} 
-        setIncome={setIncome} 
-        setGeolocation={setGeolocation} 
-      />
+    <div className="flex">
+      <div className="w-5/12 border-r-4 border-black">
+        <h2>Navigation</h2>
+      </div>
+      <div className="w-7/12"> 
+        {currentPage === 0 && (
+        <DemographicPage 
+          inputRefs={inputRefs} 
+          age={age} 
+          gender={gender} 
+          income={income} 
+          geolocation={geolocation} 
+          setAge={setAge} 
+          setGender={setGender} 
+          setIncome={setIncome} 
+          setGeolocation={setGeolocation} 
+          onSubmit={handleNextPage}
+        />
+        )}
 
-      {/* AHP Page with Questions */}
-      <AHPPage criteriaList={[
-        // ... existing criteria ...
-      ]} />
+        {/* AHP Page with Questions */}
+        {currentPage === 1 && (
+        <AHPPage criteriaList={[
+          // ... existing criteria ...
+        ]} 
+        onSubmit={handleNextPage}
+        />
+        )}
 
-      {/* Add ConsumerBehaviorPage component here */}
-      <ConsumerBehaviorPage 
-        inputRefs={inputRefs} 
-        frequency_of_fast_food_dining={frequency_of_fast_food_dining}
-        monthly_spenditure_on_fast_food={monthly_spenditure_on_fast_food}
-        setFrequencyOfFastFoodDining={setFrequencyOfFastFoodDining}
-        setMonthlySpenditureOnFastFood={setMonthlySpenditureOnFastFood}
-      />
+        {/* Add ConsumerBehaviorPage component here */}
+        {currentPage === 2 && (
+        <ConsumerBehaviorPage 
+          inputRefs={inputRefs} 
+          frequency_of_fast_food_dining={frequency_of_fast_food_dining}
+          monthly_spenditure_on_fast_food={monthly_spenditure_on_fast_food}
+          setFrequencyOfFastFoodDining={setFrequencyOfFastFoodDining}
+          setMonthlySpenditureOnFastFood={setMonthlySpenditureOnFastFood}
+          onSubmit={handleNextPage}
+        />
+        )}
 
-      {/* Competitor Rating Page */}
-      <RatingPage 
-        inputRefs={inputRefs}
-        taste={competitor_taste}
-        atmosphere={competitor_atmosphere}
-        prices={competitor_prices}
-        setTaste={setCTaste}
-        setAtmosphere={setCAtmosphere}
-        setPrices={setCPrices}
-        api={"/api/competitor-rating-questions"}
-      />
+        {/* Competitor Rating Page */}
+        {currentPage === 3 && (
+        <RatingPage 
+          inputRefs={inputRefs}
+          taste={competitor_taste}
+          atmosphere={competitor_atmosphere}
+          prices={competitor_prices}
+          setTaste={setCTaste}
+          setAtmosphere={setCAtmosphere}
+          setPrices={setCPrices}
+          api={"/api/competitor-rating-questions"}
+          onSubmit={handleNextPage}
+        />
+        )}
 
-      {/* New Brand Rating Page */}
-      <RatingPage 
-        inputRefs={inputRefs}
-        taste={nb_taste}
-        atmosphere={nb_atmosphere}
-        prices={nb_prices}
-        setTaste={setNTaste}
-        setAtmosphere={setNAtmosphere}
-        setPrices={setNPrices}
-        api={"/api/newbrand-rating-questions"}
-      />
+        {/* New Brand Rating Page */}
+        {currentPage === 4 && (
+        <RatingPage 
+          inputRefs={inputRefs}
+          taste={nb_taste}
+          atmosphere={nb_atmosphere}
+          prices={nb_prices}
+          setTaste={setNTaste}
+          setAtmosphere={setNAtmosphere}
+          setPrices={setNPrices}
+          api={"/api/newbrand-rating-questions"}
+          onSubmit={handleNextPage}
+        />
+        )}
 
-      {/* Market Awareness Page */}
-      <MarketAwarenessPage 
-        inputRefs={inputRefs}
-        recognizedCompetitors={recognizedCompetitors}
-        setRecognizedCompetitors={setRecognizedCompetitors}
-      />
+        {/* Market Awareness Page */}
+        {currentPage === 5 && (
+        <MarketAwarenessPage 
+          inputRefs={inputRefs}
+          recognizedCompetitors={recognizedCompetitors}
+          setRecognizedCompetitors={setRecognizedCompetitors}
+          onSubmit={handleNextPage}
+        />
+        )}
 
-      <GuessPricesPage
-        inputRefs={inputRefs}
-        burger={burger}
-        burger_premium={burger_premium}
-        bundle={bundle}
-        setBurger={setBurger}
-        setBurgerPremium={setBurgerPremium}
-        setBundle={setBundle}
-      />
+        {currentPage === 6 && (
+        <GuessPricesPage
+          inputRefs={inputRefs}
+          burger={burger}
+          burger_premium={burger_premium}
+          bundle={bundle}
+          setBurger={setBurger}
+          setBurgerPremium={setBurgerPremium}
+          setBundle={setBundle}
+          onSubmit={handleNextPage}
+        />
+        )}
 
-      <WTPDirectPage 
-        inputRefs={inputRefs}
-        burger_wtp={burger_wtp}
-        burger_premium_wtp={burger_premium_wtp}
-        bundle_wtp={bundle_wtp}
-        setBurgerWTP={setBurgerWTP}
-        setBurgerPremiumWTP={setBurgerPremiumWTP}
-        setBundleWTP={setBundleWTP}
-      />
+        {currentPage === 7 && (
+        <WTPDirectPage 
+          inputRefs={inputRefs}
+          burger_wtp={burger_wtp}
+          burger_premium_wtp={burger_premium_wtp}
+          bundle_wtp={bundle_wtp}
+          setBurgerWTP={setBurgerWTP}
+          setBurgerPremiumWTP={setBurgerPremiumWTP}
+          setBundleWTP={setBundleWTP}
+          onSubmit={handleNextPage}
+        />
+        )}
 
-      {/* <WTPCBCPage 
-        inputRefs={inputRefs}
-      /> */}
+        {/* <WTPCBCPage 
+          inputRefs={inputRefs}
+        /> */}
+      </div>
     </div>
   );
 }
