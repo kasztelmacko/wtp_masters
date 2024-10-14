@@ -9,6 +9,7 @@ import WTPDirectPage from './components/pages/WTPDirectPage';
 import WTPCBCPage from './components/pages/WTPCBCPage';
 
 function App() {
+  // New state for DemographicPage
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
   const [income, setIncome] = useState('');
@@ -78,7 +79,7 @@ function App() {
         <h2>Navigation</h2>
       </div>
       <div className="grid w-7/12 content-center justify-items-center"> 
-        {currentPage === 1 && (
+        {currentPage === 0 && (
         <DemographicPage 
           inputRefs={inputRefs} 
           age={age} 
@@ -94,9 +95,8 @@ function App() {
         )}
 
         {/* AHP Page with Questions */}
-        {currentPage === 0 && (
+        {currentPage === 1 && (
         <AHPPage criteriaList={[
-          // ... existing criteria ...
         ]} 
         onSubmit={handleNextPage}
         />

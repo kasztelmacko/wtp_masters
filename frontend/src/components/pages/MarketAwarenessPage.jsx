@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import MultipleChoiceQuestion from '../questions/MultipleChoiceQuestion';
+import FormWrapper from '../FormWrapper';
 
 const MarketAwarenessPage = ({ inputRefs, recognizedCompetitors = [], setRecognizedCompetitors, onSubmit }) => {
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = async () => {
         onSubmit();
 
         const MarketAwarenessQuestions = {
@@ -28,7 +28,7 @@ const MarketAwarenessPage = ({ inputRefs, recognizedCompetitors = [], setRecogni
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <FormWrapper onSubmit={handleSubmit}>
             <MultipleChoiceQuestion 
                 ref={inputRefs.recognized_competitors}
                 id="recognized_competitors"
@@ -53,8 +53,7 @@ const MarketAwarenessPage = ({ inputRefs, recognizedCompetitors = [], setRecogni
                 ]}
                 required={false}
             />
-            <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
+        </FormWrapper>
     );
 }
 

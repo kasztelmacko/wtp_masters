@@ -1,43 +1,56 @@
 import React from 'react';
 import axios from 'axios';
 import InputQuestion from '../questions/InputQuestion';
+import FormWrapper from '../FormWrapper';
 
 const GuessPricesPage = ({ inputRefs, burger, burger_premium, bundle, setBurger, setBurgerPremium, setBundle, onSubmit }) => {
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = async () => {
         onSubmit();
 
-        const GuessPricesQuestions = {
-            burger: {
+        const questionsConfig = [
+            {
+                key: 'burger',
                 input_type: inputRefs.burger.current.type,
                 question_name: inputRefs.burger.current.id,
                 required: inputRefs.burger.current.required,
                 question_text: parseFloat(burger),
             },
-            burger_premium: {
+            {
+                key: 'burger_premium',
                 input_type: inputRefs.burger_premium.current.type,
                 question_name: inputRefs.burger_premium.current.id,
                 required: inputRefs.burger_premium.current.required,
                 question_text: parseFloat(burger_premium),
             },
-            bundle: {
+            {
+                key: 'bundle',
                 input_type: inputRefs.bundle.current.type,
                 question_name: inputRefs.bundle.current.id,
                 required: inputRefs.bundle.current.required,
                 question_text: parseFloat(bundle),
             }
-        };
+        ];
+
+        const GuessPricesQuestions = questionsConfig.reduce((acc, question) => {
+            acc[question.key] = {
+                input_type: question.input_type,
+                question_name: question.question_name,
+                required: question.required,
+                question_text: question.question_text,
+            };
+            return acc;
+        }, {});
 
         try {
             console.log('Payload being sent:', GuessPricesQuestions);
             const response = await axios.post('http://127.0.0.1:8000/api/guess-prices-questions', GuessPricesQuestions);
-          } catch (error) {
+        } catch (error) {
             console.error('Error sending question:', error);
-          }
+        }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <FormWrapper onSubmit={handleSubmit}>
             <div>
                 <InputQuestion
                     ref={inputRefs.burger}
@@ -51,7 +64,7 @@ const GuessPricesPage = ({ inputRefs, burger, burger_premium, bundle, setBurger,
                 <InputQuestion
                     ref={inputRefs.burger_premium}
                     id="burger_premium"
-                    label="Burger_premium"
+                    label="Burger Premium"
                     type="number"
                     required={true}
                     value={burger_premium}
@@ -67,8 +80,7 @@ const GuessPricesPage = ({ inputRefs, burger, burger_premium, bundle, setBurger,
                     onChange={(e) => setBundle(e.target.value)}
                 />  
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
+        </FormWrapper>
     );
 };
 

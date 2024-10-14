@@ -2,20 +2,22 @@ import React from 'react';
 import axios from 'axios';
 import InputQuestion from '../questions/InputQuestion';
 import SingleChoiceQuestion from '../questions/SingleChoiceQuestion';
+import FormWrapper from '../FormWrapper';
 
 const DemographicPage = ({ inputRefs, age, gender, income, geolocation, setAge, setGender, setIncome, setGeolocation, onSubmit }) => {
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
+  const handleSubmit = async () => {
     onSubmit(); 
-    const inputQuestions = {
-      age: {
+
+    const questionsConfig = [
+      {
+        key: 'age',
         input_type: inputRefs.age.current.type,
         question_name: inputRefs.age.current.id,
         required: inputRefs.age.current.required,
         question_text: parseFloat(age),
       },
-      gender: {
+      {
+        key: 'gender',
         question_name: inputRefs.gender.current.id,
         question_text: gender,
         required: inputRefs.gender.current.required,
@@ -23,7 +25,8 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, setAge, 
           .map(option => option.value)
           .filter(value => value !== ''),
       },
-      income: {
+      {
+        key: 'income',
         question_name: inputRefs.income.current.id,
         question_text: income,
         required: inputRefs.income.current.required,
@@ -31,7 +34,8 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, setAge, 
           .map(option => option.value)
           .filter(value => value !== ''),
       },
-      geolocation: {
+      {
+        key: 'geolocation',
         question_name: inputRefs.geolocation.current.id,
         question_text: geolocation,
         required: inputRefs.geolocation.current.required,
@@ -39,7 +43,18 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, setAge, 
           .map(option => option.value)
           .filter(value => value !== ''),
       }
-    };
+    ];
+
+    const inputQuestions = questionsConfig.reduce((acc, question) => {
+      acc[question.key] = {
+        input_type: question.input_type,
+        question_name: question.question_name,
+        required: question.required,
+        question_text: question.question_text,
+        choices: question.choices,
+      };
+      return acc;
+    }, {});
 
     try {
       console.log('Payload being sent:', inputQuestions);
@@ -50,7 +65,7 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, setAge, 
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <FormWrapper onSubmit={handleSubmit}> {/* Use FormWrapper */}
       <div className="flex flex-wrap">
         {/* Age Input */}
         <div className="w-1/2 p-2">
@@ -65,7 +80,6 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, setAge, 
             placeholder="age"
           />
         </div>
-  
         {/* Gender Input as Select */}
         <div className="w-1/2 p-2">
           <SingleChoiceQuestion
@@ -82,7 +96,6 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, setAge, 
             required={true}
           />
         </div>
-  
         {/* Income Input */}
         <div className="w-1/2 p-2">
           <SingleChoiceQuestion
@@ -100,7 +113,6 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, setAge, 
             required={true}
           />
         </div>
-  
         {/* Geolocation Input */}
         <div className="w-1/2 p-2">
           <SingleChoiceQuestion
@@ -121,9 +133,7 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, setAge, 
           />
         </div>
       </div>
-      {/* Submit Button */}
-      <button type="submit" className="btn btn-primary">Submit</button>
-    </form>
+    </FormWrapper>
   );
 };
 

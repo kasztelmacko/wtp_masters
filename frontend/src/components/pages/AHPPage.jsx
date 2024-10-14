@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import AHPQuestion from '../questions/AHPQuestion';
+import FormWrapper from '../FormWrapper';
 
 const AHPPage = ({ onSubmit }) => {
   const questions = [
@@ -61,8 +62,7 @@ const AHPPage = ({ onSubmit }) => {
     }
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
     const finalAnswers = saveCurrentAnswer();
 
     try {
@@ -76,7 +76,7 @@ const AHPPage = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className='w-full'>
+    <FormWrapper onSubmit={handleSubmit}>
       {questions.map((question, index) => (
         currentQuestionIndex === index && (
           <AHPQuestion
@@ -90,11 +90,9 @@ const AHPPage = ({ onSubmit }) => {
       <div className='justify-end'>
         {currentQuestionIndex < questions.length - 1 ? (
           <button type="button" onClick={handleNext} className="btn btn-primary">Next</button>
-        ) : (
-          <button type="submit" className="btn btn-primary">Submit</button>
-        )}
+        ) : null}
       </div>
-    </form>
+    </FormWrapper>
   );
 };
 

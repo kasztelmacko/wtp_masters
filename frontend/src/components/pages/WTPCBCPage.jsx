@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import CBCQuestion from '../questions/CBCQuestion';
+import FormWrapper from '../FormWrapper';
 
 const WTPCBCPage = ({ onSubmit }) => {
     const [questions, setQuestions] = useState([]);
@@ -27,8 +28,7 @@ const WTPCBCPage = ({ onSubmit }) => {
         fetchQuestions();
     }, [respondentId]);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = async () => {
         onSubmit();
 
         const WTPCBCQuestions = questions
@@ -73,7 +73,7 @@ const WTPCBCPage = ({ onSubmit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <FormWrapper onSubmit={handleSubmit}> {/* Use FormWrapper */}
             {Object.values(groupedQuestions).map(question => (
                 <CBCQuestion 
                     key={question.question_id}
@@ -86,8 +86,7 @@ const WTPCBCPage = ({ onSubmit }) => {
                     required={true}
                 />
             ))}
-            <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
+        </FormWrapper>
     );
 };
 
