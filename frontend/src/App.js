@@ -73,12 +73,12 @@ function App() {
   };
 
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       <div className="w-5/12 border-r-4 border-black">
         <h2>Navigation</h2>
       </div>
-      <div className="w-7/12"> 
-        {currentPage === 0 && (
+      <div className="grid w-7/12 content-center justify-items-center"> 
+        {currentPage === 1 && (
         <DemographicPage 
           inputRefs={inputRefs} 
           age={age} 
@@ -94,7 +94,7 @@ function App() {
         )}
 
         {/* AHP Page with Questions */}
-        {currentPage === 1 && (
+        {currentPage === 0 && (
         <AHPPage criteriaList={[
           // ... existing criteria ...
         ]} 

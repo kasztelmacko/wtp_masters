@@ -1,18 +1,18 @@
 import React, { forwardRef } from 'react';
 
-const SingleChoiceQuestion = forwardRef(({ id, label, value, onChange, options, required = false }, ref) => {
+const SingleChoiceQuestion = forwardRef(({ id, label, value, onChange, options, required = true }, ref) => {
   return (
     <div>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id} className='block text-gray-700 text-sm font-bold mb-2'>{label}</label>
       <select 
-        className="select select-ghost w-full max-w-xs"
+        className="select select-bordered w-full max-w-xs"
         ref={ref}
         id={id}
         value={value}
         onChange={onChange}
         required={required}
       >
-        <option value="" disabled selected></option>
+        <option value="" disabled hidden>Select an option</option>
         {options.map(option => (
           <option key={option.value} value={option.value}>
             {option.label}

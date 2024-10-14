@@ -51,67 +51,75 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, setAge, 
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
+      <div className="flex flex-wrap">
         {/* Age Input */}
-        <InputQuestion
-          ref={inputRefs.age}
-          id="age"
-          label="Age"
-          type="number"
-          required={true}
-          value={age}
-          onChange={(e) => setAge(e.target.value)}
-          placeholder="age"
-        />
-
+        <div className="w-1/2 p-2">
+          <InputQuestion
+            ref={inputRefs.age}
+            id="age"
+            label="Age"
+            type="number"
+            required={true}
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            placeholder="age"
+          />
+        </div>
+  
         {/* Gender Input as Select */}
-        <SingleChoiceQuestion
-          ref={inputRefs.gender}
-          id="gender"
-          label="Gender"
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-          options={[
-            { value: 'male', label: 'Male' },
-            { value: 'female', label: 'Female' },
-            { value: 'other', label: 'Other' },
-          ]}
-          required={true}
-        />
-
+        <div className="w-1/2 p-2">
+          <SingleChoiceQuestion
+            ref={inputRefs.gender}
+            id="gender"
+            label="Gender"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+            options={[
+              { value: 'male', label: 'Male' },
+              { value: 'female', label: 'Female' },
+              { value: 'other', label: 'Other' },
+            ]}
+            required={true}
+          />
+        </div>
+  
         {/* Income Input */}
-        <SingleChoiceQuestion
-          ref={inputRefs.income}
-          id="income"
-          label="Income"
-          value={income}
-          onChange={(e) => setIncome(e.target.value)}
-          options={[
-            { value: 'under_20k', label: 'Under $20,000' },
-            { value: '20k_50k', label: '$20,000 - $50,000' },
-            { value: '50k_100k', label: '$50,000 - $100,000' },
-            { value: 'over_100k', label: 'Over $100,000' },
-          ]}
-          required={true}
-        />
-
+        <div className="w-1/2 p-2">
+          <SingleChoiceQuestion
+            ref={inputRefs.income}
+            id="income"
+            label="Income"
+            value={income}
+            onChange={(e) => setIncome(e.target.value)}
+            options={[
+              { value: 'under_20k', label: 'Under $20,000' },
+              { value: '20k_50k', label: '$20,000 - $50,000' },
+              { value: '50k_100k', label: '$50,000 - $100,000' },
+              { value: 'over_100k', label: 'Over $100,000' },
+            ]}
+            required={true}
+          />
+        </div>
+  
         {/* Geolocation Input */}
-        <SingleChoiceQuestion
-          ref={inputRefs.geolocation}
-          id="geolocation"
-          label="Geolocation"
-          value={geolocation}
-          onChange={(e) => setGeolocation(e.target.value)}
-          options={[
-            { value: 'north_america', label: 'North America' },
-            { value: 'south_america', label: 'South America' },
-            { value: 'europe', label: 'Europe' },
-            { value: 'asia', label: 'Asia' },
-            { value: 'africa', label: 'Africa' },
-            { value: 'oceania', label: 'Oceania' },
-          ]}
-          required={true}
-        />
+        <div className="w-1/2 p-2">
+          <SingleChoiceQuestion
+            ref={inputRefs.geolocation}
+            id="geolocation"
+            label="Geolocation"
+            value={geolocation}
+            onChange={(e) => setGeolocation(e.target.value)}
+            options={[
+              { value: 'north_america', label: 'North America' },
+              { value: 'south_america', label: 'South America' },
+              { value: 'europe', label: 'Europe' },
+              { value: 'asia', label: 'Asia' },
+              { value: 'africa', label: 'Africa' },
+              { value: 'oceania', label: 'Oceania' },
+            ]}
+            required={true}
+          />
+        </div>
       </div>
       {/* Submit Button */}
       <button type="submit" className="btn btn-primary">Submit</button>

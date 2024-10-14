@@ -1,26 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import AHPQuestion from '../questions/AHPQuestion';
 
 const AHPPage = ({ onSubmit }) => {
-  const questionRefs = useRef({
-    "brand_recognition_vs_brand_recall": React.createRef(),
-    "brand_recognition_vs_brand_past_purchase_or_use": React.createRef(),
-    "brand_recognition_vs_emotional_perception_of_the_brand": React.createRef(),
-    "brand_recognition_vs_logo": React.createRef(),
-    "brand_recognition_vs_utilitarian_benefits": React.createRef(),
-    "brand_recall_vs_brand_past_purchase_or_use": React.createRef(),
-    "brand_recall_vs_emotional_perception_of_the_brand": React.createRef(),
-    "brand_recall_vs_logo": React.createRef(),
-    "brand_recall_vs_utilitarian_benefits": React.createRef(),
-    "brand_past_purchase_or_use_vs_emotional_perception_of_the_brand": React.createRef(),
-    "brand_past_purchase_or_use_vs_logo": React.createRef(),
-    "brand_past_purchase_or_use_vs_utilitarian_benefits": React.createRef(),
-    "emotional_perception_of_the_brand_vs_logo": React.createRef(),
-    "emotional_perception_of_the_brand_vs_utilitarian_benefits": React.createRef(),
-    "logo_vs_utilitarian_benefits": React.createRef()
-  });
-
   const questions = [
     { id: "brand_recognition_vs_brand_recall", criteria: ["Brand Recognition", "Brand Recall"] },
     { id: "brand_recognition_vs_brand_past_purchase_or_use", criteria: ["Brand Recognition", "Brand Past Purchase or Use"] },
@@ -39,36 +21,79 @@ const AHPPage = ({ onSubmit }) => {
     { id: "logo_vs_utilitarian_benefits", criteria: ["Logo", "Utilitarian Benefits"]}
   ];
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    onSubmit();
+  const questionRefs = useRef(questions.reduce((acc, question) => {
+    acc[question.id] = React.createRef(); 
+    return acc;
+  }, {}));
 
-    const questionData = questions.reduce((acc, { id, criteria }) => {
-      acc[id] = {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [answers, setAnswers] = useState({});
+
+  const saveCurrentAnswer = () => {
+    const currentQuestion = questions[currentQuestionIndex];
+    const inputRef = questionRefs.current[currentQuestion.id];
+
+    if (inputRef && inputRef.current) {
+      const updatedAnswer = {
         choices: ['1/7', '1/5', '1/3', '1', '3', '5', '7'],
-        criteria,
-        question_name: id,
-        question_text: questionRefs.current[id].current.value,
+        criteria: currentQuestion.criteria,
+        question_name: currentQuestion.id,
+        question_text: inputRef.current.value,
         required: true,
       };
-      return acc;
-    }, {});
+
+      setAnswers((prevAnswers) => ({
+        ...prevAnswers,
+        [currentQuestion.id]: updatedAnswer,
+      }));
+
+      return { ...answers, [currentQuestion.id]: updatedAnswer };
+    }
+    return answers;
+  };
+
+  const handleNext = () => {
+    const updatedAnswers = saveCurrentAnswer();
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    } else {
+      handleSubmit(new Event('submit'));
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const finalAnswers = saveCurrentAnswer();
 
     try {
-      console.log('Payload being sent:', questionData);
-      const response = await axios.post('http://127.0.0.1:8000/api/ahp-questions', questionData);
+      console.log('Payload being sent:', finalAnswers);
+      const response = await axios.post('http://127.0.0.1:8000/api/ahp-questions', finalAnswers);
       console.log('Response from server:', response.data);
+      onSubmit();
     } catch (error) {
       console.error('Error sending questions:', error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {questions.map(({ id, criteria }) => (
-        <AHPQuestion key={id} ref={questionRefs.current[id]} criteria={criteria} id={id} />
+    <form onSubmit={handleSubmit} className='w-full'>
+      {questions.map((question, index) => (
+        currentQuestionIndex === index && (
+          <AHPQuestion
+            key={question.id}
+            ref={questionRefs.current[question.id]}
+            criteria={question.criteria}
+            id={question.id}
+          />
+        )
       ))}
-      <button type="submit" className="btn btn-primary">Submit All</button>
+      <div className='justify-end'>
+        {currentQuestionIndex < questions.length - 1 ? (
+          <button type="button" onClick={handleNext} className="btn btn-primary">Next</button>
+        ) : (
+          <button type="submit" className="btn btn-primary">Submit</button>
+        )}
+      </div>
     </form>
   );
 };
