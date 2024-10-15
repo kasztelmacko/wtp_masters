@@ -7,6 +7,7 @@ import MarketAwarenessPage from './components/pages/MarketAwarenessPage';
 import GuessPricesPage from './components/pages/GuessPricesPage';
 import WTPDirectPage from './components/pages/WTPDirectPage';
 import WTPCBCPage from './components/pages/WTPCBCPage';
+import InfoPage from './components/InfoPage';
 
 function App() {
   // New state for DemographicPage
@@ -76,7 +77,7 @@ function App() {
   return (
     <div className="flex h-screen">
       <div className="w-5/12 border-r-4 border-black">
-        <h2>Navigation</h2>
+        <InfoPage currentPage={currentPage} />
       </div>
       <div className="grid w-7/12 content-center justify-items-center"> 
         {currentPage === 0 && (
@@ -95,7 +96,7 @@ function App() {
         )}
 
         {/* AHP Page with Questions */}
-        {currentPage === 1 && (
+        {currentPage === 4 && (
         <AHPPage criteriaList={[
         ]} 
         onSubmit={handleNextPage}
@@ -103,7 +104,7 @@ function App() {
         )}
 
         {/* Add ConsumerBehaviorPage component here */}
-        {currentPage === 2 && (
+        {currentPage === 1 && (
         <ConsumerBehaviorPage 
           inputRefs={inputRefs} 
           frequency_of_fast_food_dining={frequency_of_fast_food_dining}
@@ -115,7 +116,7 @@ function App() {
         )}
 
         {/* Competitor Rating Page */}
-        {currentPage === 3 && (
+        {currentPage === 6 && (
         <RatingPage 
           inputRefs={inputRefs}
           taste={competitor_taste}
@@ -130,7 +131,7 @@ function App() {
         )}
 
         {/* New Brand Rating Page */}
-        {currentPage === 4 && (
+        {currentPage === 7 && (
         <RatingPage 
           inputRefs={inputRefs}
           taste={nb_taste}
@@ -145,7 +146,7 @@ function App() {
         )}
 
         {/* Market Awareness Page */}
-        {currentPage === 5 && (
+        {currentPage === 2 && (
         <MarketAwarenessPage 
           inputRefs={inputRefs}
           recognizedCompetitors={recognizedCompetitors}
@@ -154,7 +155,7 @@ function App() {
         />
         )}
 
-        {currentPage === 6 && (
+        {currentPage === 3 && (
         <GuessPricesPage
           inputRefs={inputRefs}
           burger={burger}
@@ -167,7 +168,7 @@ function App() {
         />
         )}
 
-        {currentPage === 7 && (
+        {currentPage === 5 && (
         <WTPDirectPage 
           inputRefs={inputRefs}
           burger_wtp={burger_wtp}

@@ -36,7 +36,6 @@ const WTPDirectPage = ({ inputRefs, burger_wtp, burger_premium_wtp, bundle_wtp, 
             <div>
                 {questions.map(({ id, setValue }) => (
                     <div key={id}>
-                        What is the maximum amount you would be willing to pay for this
                         <InputQuestion
                             ref={inputRefs[id]}
                             id={id}
