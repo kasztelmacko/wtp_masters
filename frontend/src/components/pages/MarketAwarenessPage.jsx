@@ -28,11 +28,11 @@ const MarketAwarenessPage = ({ inputRefs, recognizedCompetitors = [], setRecogni
     }
 
     return (
-        <FormWrapper onSubmit={handleSubmit}>
+        <FormWrapper onSubmit={handleSubmit} isLastPage={true}>
             <MultipleChoiceQuestion 
                 ref={inputRefs.recognized_competitors}
                 id="recognized_competitors"
-                label="Recognized Competitors"
+                label="Check the boxes of fast food brands you recognize"
                 selectedValues={recognizedCompetitors}
                 onChange={setRecognizedCompetitors}
                 options={[

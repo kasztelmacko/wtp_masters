@@ -32,7 +32,7 @@ const WTPDirectPage = ({ inputRefs, burger_wtp, burger_premium_wtp, bundle_wtp, 
     };
 
     return (
-        <FormWrapper onSubmit={handleSubmit}>
+        <FormWrapper onSubmit={handleSubmit} isLastPage={true}>
             <div>
                 {questions.map(({ id, setValue }) => (
                     <div key={id}>

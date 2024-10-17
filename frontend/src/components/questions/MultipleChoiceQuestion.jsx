@@ -15,22 +15,20 @@ const MultipleChoiceQuestion = forwardRef(({ id, label, selectedValues, onChange
     };
 
     return (
-        <div>
-            <label>{label}</label>
-            <div>
+        <div className="multiple-choice-question">
+            <label htmlFor={id} className="block mb-2">{label}</label>
+            <div className="grid grid-cols-2 gap-4 gap-x-28">
                 {options.map(option => (
-                    <div key={option.value}>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value={option.value}
-                                checked={selectedValues.includes(option.value)}
-                                onChange={() => handleChange(option.value)}
-                                required={required}
-                            />
-                            {option.label}
-                        </label>
-                    </div>
+                    <label key={option.value} className="flex items-center">
+                        <input
+                            type="checkbox"
+                            value={option.value}
+                            checked={selectedValues.includes(option.value)}
+                            onChange={() => handleChange(option.value)}
+                            className="w-6 h-6 checkbox checkbox-success"
+                        />
+                        <span className="ml-2">{option.label}</span>
+                    </label>
                 ))}
             </div>
         </div>

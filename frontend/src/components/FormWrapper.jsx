@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FormWrapper = ({ onSubmit, children }) => {
+const FormWrapper = ({ onSubmit, onNext, isLastPage, children }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit();
@@ -12,8 +12,12 @@ const FormWrapper = ({ onSubmit, children }) => {
         <div className='flex flex-col items-center'>
           {children}
         </div>
-        <div className='flex justify-end'>
-          <button type="submit" className="btn btn-primary">Submit</button>
+        <div className='flex justify-center'>
+            {isLastPage ? (
+                <button type="submit" className='btn btn-success'>Submit</button>
+            ) : (
+                <button type="button" onClick={onNext} className='btn btn-success'>Next</button>
+            )}
         </div>
       </form>
     </div>

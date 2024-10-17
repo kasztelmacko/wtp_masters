@@ -3,9 +3,10 @@ import axios from 'axios';
 import CBCQuestion from '../questions/CBCQuestion';
 import FormWrapper from '../FormWrapper';
 
-const WTPCBCPage = ({ onSubmit }) => {
+const WTPCBCPage = () => {
     const [questions, setQuestions] = useState([]);
     const [responses, setResponses] = useState({});
+    const [currentPage, setCurrentPage] = useState(0);
     const inputRefs = useRef({});
     const respondentId = 2;
 
@@ -14,7 +15,7 @@ const WTPCBCPage = ({ onSubmit }) => {
             try {
                 const response = await axios.get(`http://127.0.0.1:8000/api/cbc-wtp-questions?respondent_id=${respondentId}`);
                 console.log('Fetched questions:', response.data);
-                
+
                 if (Array.isArray(response.data.data)) {
                     setQuestions(response.data.data);
                 } else {
@@ -29,8 +30,6 @@ const WTPCBCPage = ({ onSubmit }) => {
     }, [respondentId]);
 
     const handleSubmit = async () => {
-        onSubmit();
-
         const WTPCBCQuestions = questions
             .filter(question => responses[question.question_id] === question.profile_id)
             .reduce((acc, question) => {
@@ -46,7 +45,6 @@ const WTPCBCPage = ({ onSubmit }) => {
                 return acc;
             }, {});
 
-
         try {
             console.log('Payload being sent:', WTPCBCQuestions);
             const response = await axios.post('http://127.0.0.1:8000/api/cbc-wtp-questions', WTPCBCQuestions);
@@ -56,15 +54,6 @@ const WTPCBCPage = ({ onSubmit }) => {
         }
     };
 
-    const groupedQuestions = Array.isArray(questions) ? questions.reduce((acc, question) => {
-        const { question_id, profile_id } = question;
-        if (!acc[question_id]) {
-            acc[question_id] = { ...question, options: [] };
-        }
-        acc[question_id].options.push({ value: profile_id, label: profile_id });
-        return acc;
-    }, {}) : {};
-
     const handleChange = (questionId, value) => {
         setResponses(prevResponses => ({
             ...prevResponses,
@@ -72,20 +61,48 @@ const WTPCBCPage = ({ onSubmit }) => {
         }));
     };
 
+    const nextPage = () => {
+        if (currentPage < Object.keys(groupedQuestions).length - 1) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const groupedQuestions = questions.reduce((acc, question) => {
+        if (!acc[question.question_id]) {
+            acc[question.question_id] = [];
+        }
+        acc[question.question_id].push(question);
+        return acc;
+    }, {});
+
+    const currentQuestion = Object.values(groupedQuestions)[currentPage];
+
+    const currentQuestionOptions = currentQuestion?.map(q => ({
+        value: q.profile_id,
+        img_url: q.img_url,
+        item_name: q.item_name,
+        item_description: q.item_description,
+        price: q.price,
+        calories: q.calories,
+        portion_size: q.portion_size,
+        no_choice: q.no_choice
+    }));
+
+    const isLastPage = currentPage === Object.keys(groupedQuestions).length - 1;
+
     return (
-        <FormWrapper onSubmit={handleSubmit}> {/* Use FormWrapper */}
-            {Object.values(groupedQuestions).map(question => (
-                <CBCQuestion 
-                    key={question.question_id}
-                    ref={inputRefs.current[`question_${question.question_id}`]}
-                    id={`question_${question.question_id}`}
-                    label={`Question ${question.question_id}`}
-                    selectedValue={responses[question.question_id]}
-                    onChange={(value) => handleChange(question.question_id, value)}
-                    options={question.options}
+        <FormWrapper onSubmit={handleSubmit} onNext={nextPage} isLastPage={isLastPage}>
+            {currentQuestion && (
+                <CBCQuestion
+                    ref={el => inputRefs.current[`question_${currentQuestion[0].question_id}`] = el}
+                    id={`question_${currentQuestion[0].question_id}`}
+                    label={`Question ${currentQuestion[0].question_id}`}
+                    selectedValue={responses[currentQuestion[0].question_id]}
+                    onChange={(value) => handleChange(currentQuestion[0].question_id, value)}
+                    options={currentQuestionOptions}
                     required={true}
                 />
-            ))}
+            )}
         </FormWrapper>
     );
 };

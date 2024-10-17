@@ -19,7 +19,7 @@ const AHPPage = ({ onSubmit }) => {
     { id: "brand_past_purchase_or_use_vs_utilitarian_benefits", criteria: ["Brand Past Purchase or Use", "Utilitarian Benefits"] },
     { id: "emotional_perception_of_the_brand_vs_logo", criteria: ["Emotional Perception of the Brand", "Logo"] },
     { id: "emotional_perception_of_the_brand_vs_utilitarian_benefits", criteria: ["Emotional Perception of the Brand", "Utilitarian Benefits"] },
-    { id: "logo_vs_utilitarian_benefits", criteria: ["Logo", "Utilitarian Benefits"]}
+    { id: "logo_vs_utilitarian_benefits", criteria: ["Logo", "Utilitarian Benefits"] }
   ];
 
   const questionRefs = useRef(questions.reduce((acc, question) => {
@@ -53,12 +53,12 @@ const AHPPage = ({ onSubmit }) => {
     return answers;
   };
 
-  const handleNext = () => {
-    const updatedAnswers = saveCurrentAnswer();
+  const nextPage = () => {
+    saveCurrentAnswer();
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     } else {
-      handleSubmit(new Event('submit'));
+      handleSubmit();
     }
   };
 
@@ -75,8 +75,10 @@ const AHPPage = ({ onSubmit }) => {
     }
   };
 
+  const isLastPage = currentQuestionIndex === questions.length - 1;
+
   return (
-    <FormWrapper onSubmit={handleSubmit}>
+    <FormWrapper onSubmit={handleSubmit} onNext={nextPage} isLastPage={isLastPage}>
       {questions.map((question, index) => (
         currentQuestionIndex === index && (
           <AHPQuestion
@@ -87,11 +89,6 @@ const AHPPage = ({ onSubmit }) => {
           />
         )
       ))}
-      <div className='justify-end'>
-        {currentQuestionIndex < questions.length - 1 ? (
-          <button type="button" onClick={handleNext} className="btn btn-primary">Next</button>
-        ) : null}
-      </div>
     </FormWrapper>
   );
 };

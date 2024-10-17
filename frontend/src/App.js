@@ -116,7 +116,7 @@ function App() {
         )}
 
         {/* Competitor Rating Page */}
-        {currentPage === 6 && (
+        {currentPage === 7 && (
         <RatingPage 
           inputRefs={inputRefs}
           taste={competitor_taste}
@@ -131,7 +131,7 @@ function App() {
         )}
 
         {/* New Brand Rating Page */}
-        {currentPage === 7 && (
+        {currentPage === 8 && (
         <RatingPage 
           inputRefs={inputRefs}
           taste={nb_taste}
@@ -181,9 +181,11 @@ function App() {
         />
         )}
 
-        {/* <WTPCBCPage 
+        {currentPage === 6 && (
+        <WTPCBCPage 
           inputRefs={inputRefs}
-        /> */}
+        />
+        )}
       </div>
     </div>
   );

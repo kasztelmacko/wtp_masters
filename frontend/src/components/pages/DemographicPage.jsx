@@ -65,7 +65,7 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, setAge, 
   };
 
   return (
-    <FormWrapper onSubmit={handleSubmit}> {/* Use FormWrapper */}
+    <FormWrapper onSubmit={handleSubmit} isLastPage={true}>
       <div className="flex flex-wrap">
         {/* Age Input */}
         <div className="w-1/2 p-2">

@@ -15,6 +15,7 @@ const InfoPage = ({ currentPage }) => {
         MARKET_AWARENESS_PAGE,
         AHP_PAGE,
         OE_PAGE,
+        CBC_PAGE,
         RATING_C_PAGE,
         RATING_NB_PAGE
     ]

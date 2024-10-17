@@ -58,7 +58,7 @@ const RatingPage = ({ inputRefs, taste, atmosphere, prices, setTaste, setAtmosph
     };
 
     return (
-        <FormWrapper onSubmit={handleSubmit}> {/* Use FormWrapper */}
+        <FormWrapper onSubmit={handleSubmit} isLastPage={true}>
             <OpinionScaleQuestion
                 ref={inputRefs.taste}
                 id="taste"

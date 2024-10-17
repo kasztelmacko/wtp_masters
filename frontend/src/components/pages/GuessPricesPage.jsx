@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import InputQuestion from '../questions/InputQuestion';
 import FormWrapper from '../FormWrapper';
+import GuessPriceQuestion from '../questions/GuessPriceQuestion'; // Import the GuessPriceQuestion component
 
 const GuessPricesPage = ({ inputRefs, burger, burger_premium, bundle, setBurger, setBurgerPremium, setBundle, onSubmit }) => {
     const handleSubmit = async () => {
@@ -49,36 +49,43 @@ const GuessPricesPage = ({ inputRefs, burger, burger_premium, bundle, setBurger,
         }
     };
 
+    const items = [
+        {
+            id: 'burger',
+            item_name: 'Classic Burger',
+            item_description: 'A delicious classic burger with lettuce, tomato, and cheese.',
+            img_url: 'https://kkpcuktyelbwgigadulx.supabase.co/storage/v1/object/public/item_photos/bundle_classic.png?t=2024-10-17T17%3A35%3A25.055Z',
+        },
+        {
+            id: 'burger_premium',
+            item_name: 'Premium Burger',
+            item_description: 'A premium burger with extra toppings and sauces.',
+            img_url: 'https://kkpcuktyelbwgigadulx.supabase.co/storage/v1/object/public/item_photos/bundle_classic.png?t=2024-10-17T17%3A35%3A25.055Z',
+        },
+        {
+            id: 'bundle',
+            item_name: 'Family Bundle',
+            item_description: 'A family bundle with burgers, fries, and drinks.',
+            img_url: 'https://kkpcuktyelbwgigadulx.supabase.co/storage/v1/object/public/item_photos/bundle_classic.png?t=2024-10-17T17%3A35%3A25.055Z',
+        }
+    ];
+
     return (
-        <FormWrapper onSubmit={handleSubmit}>
-            <div>
-                <InputQuestion
-                    ref={inputRefs.burger}
-                    id="burger"
-                    label="Burger"
-                    type="number"
-                    required={true}
-                    value={burger}
-                    onChange={(e) => setBurger(e.target.value)}
-                />  
-                <InputQuestion
-                    ref={inputRefs.burger_premium}
-                    id="burger_premium"
-                    label="Burger Premium"
-                    type="number"
-                    required={true}
-                    value={burger_premium}
-                    onChange={(e) => setBurgerPremium(e.target.value)}
-                />  
-                <InputQuestion
-                    ref={inputRefs.bundle}
-                    id="bundle"
-                    label="Bundle"
-                    type="number"
-                    required={true}
-                    value={bundle}
-                    onChange={(e) => setBundle(e.target.value)}
-                />  
+        <FormWrapper onSubmit={handleSubmit} isLastPage={true}>
+            <div className="flex flex-wrap justify-between">
+                {items.map((item, index) => (
+                    <GuessPriceQuestion
+                        key={item.id}
+                        item={item}
+                        inputRef={inputRefs[item.id]}
+                        value={index === 0 ? burger : index === 1 ? burger_premium : bundle}
+                        onChange={(e) => {
+                            if (index === 0) setBurger(e.target.value);
+                            else if (index === 1) setBurgerPremium(e.target.value);
+                            else setBundle(e.target.value);
+                        }}
+                    />
+                ))}
             </div>
         </FormWrapper>
     );

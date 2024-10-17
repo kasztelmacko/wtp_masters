@@ -9,17 +9,18 @@ const ConsumerBehaviorPage = ({ inputRefs, frequency_of_fast_food_dining, monthl
             id: 'frequency_of_fast_food_dining',
             value: frequency_of_fast_food_dining,
             setValue: setFrequencyOfFastFoodDining,
+            label: "How often do you eat fast food?",
         },
         {
             id: 'monthly_spenditure_on_fast_food',
             value: monthly_spenditure_on_fast_food,
             setValue: setMonthlySpenditureOnFastFood,
+            label: "How much do you spend on fast food monthly?",
         },
     ];
     
     const handleSubmit = async () => {
         onSubmit();
-
 
         const ConsumerBehaviorQuestions = questions.reduce((acc, { id, value }) => {
             acc[id] = {
@@ -43,31 +44,34 @@ const ConsumerBehaviorPage = ({ inputRefs, frequency_of_fast_food_dining, monthl
     };
 
     return (
-        <FormWrapper onSubmit={handleSubmit}>
-            {questions.map(({ id, value, setValue }) => (
-                <SingleChoiceQuestion 
-                    key={id}
-                    ref={inputRefs[id]}
-                    id={id}
-                    label={id.replace(/_/g, ' ')}
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    options={id === 'frequency_of_fast_food_dining' ? [
-                        { value: "Never", label: "Never" },
-                        { value: "Once a month", label: "Once a month" },
-                        { value: "Once a week", label: "Once a week" },
-                        { value: "Multiple times a week", label: "Multiple times a week" },
-                        { value: "Daily", label: "Daily" }
-                    ] : [
-                        { value: "$0 - $50", label: "$0 - $50" },
-                        { value: "$51 - $100", label: "$51 - $100" },
-                        { value: "$101 - $200", label: "$101 - $200" },
-                        { value: "$201 - $300", label: "$201 - $300" },
-                        { value: "$301+", label: "$301+" }
-                    ]}
-                    required={true}
-                />
-            ))}
+        <FormWrapper onSubmit={handleSubmit} isLastPage={true}>
+            <div className="flex justify-between">
+                {questions.map(({ id, value, setValue, label }) => (
+                    <div key={id} className="flex-1 mx-2">
+                        <label htmlFor={id} className="block mb-2 min-h-12">{label}</label>
+                        <SingleChoiceQuestion 
+                            ref={inputRefs[id]}
+                            id={id}
+                            value={value}
+                            onChange={(e) => setValue(e.target.value)}
+                            options={id === 'frequency_of_fast_food_dining' ? [
+                                { value: "Never", label: "Never" },
+                                { value: "Once a month", label: "Once a month" },
+                                { value: "Once a week", label: "Once a week" },
+                                { value: "Multiple times a week", label: "Multiple times a week" },
+                                { value: "Daily", label: "Daily" }
+                            ] : [
+                                { value: "$0 - $50", label: "$0 - $50" },
+                                { value: "$51 - $100", label: "$51 - $100" },
+                                { value: "$101 - $200", label: "$101 - $200" },
+                                { value: "$201 - $300", label: "$201 - $300" },
+                                { value: "$301+", label: "$301+" }
+                            ]}
+                            required={true}
+                        />
+                    </div>
+                ))}
+            </div>
         </FormWrapper>
     );
 };
