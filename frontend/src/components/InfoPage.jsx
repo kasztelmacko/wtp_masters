@@ -6,23 +6,26 @@ import { OE_PAGE } from '../constants/oe_page';
 import { CBC_PAGE } from '../constants/cbc_page';
 import { RATING_C_PAGE } from '../constants/rating_c_page';
 import { RATING_NB_PAGE } from '../constants/rating_nb_page';
+import { GUESS_PRICE_PAGE } from '../constants/guess_price_page';
+import { END_PAGE } from '../constants/end_page';
 
 const InfoPage = ({ currentPage }) => {
     const INFO_TEXT = [
         MAIN_PAGE,
         MARKET_AWARENESS_PAGE,
-        MARKET_AWARENESS_PAGE,
+        GUESS_PRICE_PAGE,
         AHP_PAGE,
         OE_PAGE,
         OE_PAGE,
         OE_PAGE,
         CBC_PAGE,
         RATING_C_PAGE,
-        RATING_NB_PAGE
+        RATING_NB_PAGE,
+        END_PAGE
     ]
 
   return (
-    <div className="info-page h-full">
+    <div className="info-page h-full p-10">
       {INFO_TEXT[currentPage]}
     </div>
   );

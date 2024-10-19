@@ -2,24 +2,28 @@ import React from 'react';
 
 export const RATING_NB_PAGE = [
     <div class="flex flex-col items-center justify-center h-full bg-bg-primary col-span-3">
-        <div className="p-10 flex-grow" key="0">
-            <div>
-                This part of the study is asking to rate <span className="font-bold">expected</span> restaurant attributes in an established fast food brand.
+        <div className="flex-grow" key="0">
+        <div className='text-3xl font-bold'>
+                What are your expectations towards Wendy's?
             </div>
             <br />
-            <div className="text-base">
-                You will see <span className="font-bold">3 rating questions</span> concerning:
+            <div className='text-3xl font-bold'>
+                Give your expectation a rating on a 1-5 scale:
             </div>
-            <div className="text-base">
-                <ol className="list-decimal pl-5">
-                    <li>taste</li>
-                    <li>atmosphere</li>
-                    <li>prices</li>
-                </ol>
+            <div className='text-3xl font-bold'>
+                1. Taste
+            </div>
+            <div className='text-3xl font-bold'>
+                2. Atmosphere
+            </div>
+            <div className='text-3xl font-bold'>
+                3. Price Levels
             </div>
         </div>
         <div id="steps-container" class="mt-auto py-10">
             <ul class="steps">
+                <li class="step step-success"></li>
+                <li class="step step-success"></li>
                 <li class="step step-success"></li>
                 <li class="step step-success"></li>
                 <li class="step step-success"></li>

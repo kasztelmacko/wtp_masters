@@ -83,14 +83,17 @@ function App() {
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
+    if (currentPage === 10) {
+      setCurrentPage(10);
+    }
   };
 
   return (
     <div className="flex h-screen">
-      <div className="w-5/12 border-r-4 border-black">
+      <div className="w-5/12 border-r-4 border-black text-gray-700">
         <InfoPage currentPage={currentPage} />
       </div>
-      <div className="grid w-7/12 content-center justify-items-center"> 
+      <div className="w-7/12"> 
         {currentPage === 0 && (
         <DemographicPage 
           inputRefs={inputRefs} 
@@ -119,7 +122,7 @@ function App() {
         )}
 
         {/* Competitor Rating Page */}
-        {currentPage === 9 && (
+        {currentPage === 8 && (
         <RatingPage 
           inputRefs={inputRefs}
           taste={competitor_taste}
@@ -134,7 +137,7 @@ function App() {
         )}
 
         {/* New Brand Rating Page */}
-        {currentPage === 8 && (
+        {currentPage === 9 && (
         <RatingPage 
           inputRefs={inputRefs}
           taste={nb_taste}
@@ -230,6 +233,12 @@ function App() {
           inputRefs={inputRefs}
           onSubmit={handleNextPage}
         />
+        )}
+
+        {currentPage === 10 && (
+          <div className="flex items-center justify-center h-full text-gray-700">
+            <h1 className="text-3xl font-bold">Thank You for Your Time!</h1>
+          </div>
         )}
       </div>
     </div>

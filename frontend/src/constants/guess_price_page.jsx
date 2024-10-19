@@ -1,25 +1,31 @@
 import React from 'react';
 
-export const CBC_PAGE = [
+export const GUESS_PRICE_PAGE = [
     <div class="flex flex-col items-center justify-center h-full bg-bg-primary col-span-3">
-        <div className="flex-grow text-xl" key="0">
-            <div>
-                This part of the study is asking indirectly about how much would you be willing to pay for a certain fast food product.
+        <div className="flex-grow text-gray-700 mb-4 text-start" key="0">
+            <div className='text-xl'>
+            To the right there are three products available to buy in McDonald's.
             </div>
             <br />
             <div className='font-bold text-3xl'>
-                Which from these four options do you prefer?
+            How much do each of those items costs in the restaurant?
             </div>
             <br />
-            <div>The no choice option should be used when you prefer non of the given products</div>
+            <div className='text-xl'>
+            type your guesses in the input fields below the items.
+            </div>
+            <div className='text-xl'>
+            provide your answers in zł (PLN).
+            </div>
+            <br />
         </div>
         <div id="steps-container" class="mt-auto py-10">
             <ul class="steps">
                 <li class="step step-success"></li>
                 <li class="step step-success"></li>
                 <li class="step step-success"></li>
-                <li class="step step-success"></li>
-                <li class="step step-success"></li>
+                <li class="step"></li>
+                <li class="step"></li>
                 <li class="step"></li>
                 <li class="step"></li>
             </ul>

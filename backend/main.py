@@ -13,7 +13,10 @@ from schemas import (DemographicQuestions,
                      DirectWTPQuestions,
                      CBCWTPQuestions)
 
-from database.supabase_sql import get_data, save_choices, save_input, get_values_and_columns
+from database.supabase_sql import (get_data, 
+                                   save_choices, 
+                                   save_input, 
+                                   get_values_and_columns)
 
 
 app = FastAPI()

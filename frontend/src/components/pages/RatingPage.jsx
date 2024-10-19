@@ -59,33 +59,41 @@ const RatingPage = ({ inputRefs, taste, atmosphere, prices, setTaste, setAtmosph
 
     return (
         <FormWrapper onSubmit={handleSubmit} isLastPage={true}>
-            <OpinionScaleQuestion
-                ref={inputRefs.taste}
-                id="taste"
-                value={taste}
-                onChange={(e) => setTaste(e.target.value)}
-                required
-                min_value={min_value}
-                max_value={max_value}
-            />
-            <OpinionScaleQuestion
-                ref={inputRefs.atmosphere}
-                id="atmosphere"
-                value={atmosphere}
-                onChange={(e) => setAtmosphere(e.target.value)}
-                required
-                min_value={min_value}
-                max_value={max_value}
-            />
-            <OpinionScaleQuestion
-                ref={inputRefs.prices}
-                id="prices"
-                value={prices}
-                onChange={(e) => setPrices(e.target.value)}
-                required
-                min_value={min_value}
-                max_value={max_value}
-            />
+            <div className="w-full flex flex-col items-center space-y-4">
+                <div className="w-1/2">
+                    <OpinionScaleQuestion
+                        ref={inputRefs.taste}
+                        id="taste"
+                        value={taste}
+                        onChange={(e) => setTaste(e.target.value)}
+                        required
+                        min_value={min_value}
+                        max_value={max_value}
+                    />
+                </div>
+                <div className="w-1/2">
+                    <OpinionScaleQuestion
+                        ref={inputRefs.atmosphere}
+                        id="atmosphere"
+                        value={atmosphere}
+                        onChange={(e) => setAtmosphere(e.target.value)}
+                        required
+                        min_value={min_value}
+                        max_value={max_value}
+                    />
+                </div>
+                <div className="w-1/2">
+                    <OpinionScaleQuestion
+                        ref={inputRefs.prices}
+                        id="prices"
+                        value={prices}
+                        onChange={(e) => setPrices(e.target.value)}
+                        required
+                        min_value={min_value}
+                        max_value={max_value}
+                    />
+                </div>
+            </div>
         </FormWrapper>
     );
 };

@@ -2,19 +2,23 @@ import React from 'react';
 
 export const AHP_PAGE = [
     <div class="flex flex-col items-center justify-center h-full bg-bg-primary col-span-3">
-        <div className="p-10 flex-grow" key="0">
+        <div className="flex-grow text-xl" key="0">
             <div>
                 This part of the study is trying to find your priorities and preferences for decision-making when you deal with a new unknown product/brand.
             </div>
             <br />
-            <div className="text-base">
-                You will see <span className="font-bold">15 sentences</span> in which you need to fill the gap so the sentence is true to your belief.
+            <div>
+                You will see <span className="font-bold">15 sentences</span> in which you need to fill the gap so the sentence is true according to your belief.
             </div>
             <br />
-            <div className="text-base">
+            <div className='font-bold text-3xl'>
+                What is more important to you when you make a decision?
+            </div>
+            <br />
+            <div>
                 Please understand the following phrases as described below when completing the sentences:
             </div>
-            <div className="text-base">
+            <div>
                 <ul className="list-disc pl-5">
                     <li><span className="font-bold">Brand recognition:</span> How well you know the brand.</li>
                     <li><span className="font-bold">Brand recall:</span> How easily you remember the brand.</li>
@@ -31,6 +35,8 @@ export const AHP_PAGE = [
                 <li class="step step-success"></li>
                 <li class="step step-success"></li>
                 <li class="step step-success"></li>
+                <li class="step step-success"></li>
+                <li class="step"></li>
                 <li class="step"></li>
                 <li class="step"></li>
             </ul>

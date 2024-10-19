@@ -32,7 +32,7 @@ const MarketAwarenessPage = ({ inputRefs, recognizedCompetitors = [], setRecogni
             <MultipleChoiceQuestion 
                 ref={inputRefs.recognized_competitors}
                 id="recognized_competitors"
-                label="Check the boxes of fast food brands you recognize"
+                label="Which fast food brands you recognize?"
                 selectedValues={recognizedCompetitors}
                 onChange={setRecognizedCompetitors}
                 options={[

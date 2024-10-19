@@ -95,7 +95,7 @@ const WTPDirectPage = ({
 
     return (
         <FormWrapper onSubmit={handleSubmit} isLastPage={true}>
-            <div className="flex flex-col">
+            <div className="flex flex-col items-center justify-center">
                 {/* Item Card */}
                 <div className="mb-4">
                     <div className="h-full relative group flex flex-col border rounded-lg shadow-md p-4 w-full max-w-xs">
@@ -128,59 +128,59 @@ const WTPDirectPage = ({
 
                 {/* Input Questions */}
                 <div>
-                    <p>At what price would you consider this burger so expensive that you would not consider buying it?</p>
+                    <p>At what price would you consider this burger so expensive that you <span className="font-bold">would not</span> consider buying it?</p>
                     <InputQuestion
                         ref={inputRefs[`${item}_wtp_UpperT`]}
                         id={`${item}_wtp_UpperT`}
                         label=''
                         type="number"
                         required={true}
-                        value={upperT} // Bind the value to the prop
-                        onChange={(e) => setUpperT(e.target.value)} // Update state
+                        value={upperT}
+                        onChange={(e) => setUpperT(e.target.value)}
                     />
                     
-                    <p>At what price would you consider this burger so inexpensive that you would feel the quality could not be very good and you would not consider buying it?</p>
+                    <p>At what price would you consider this burger so <span className="font-bold">inexpensive</span> that you would feel the quality could not be very good and you would not consider buying it?</p>
                     <InputQuestion
                         ref={inputRefs[`${item}_wtp_LowerT`]}
                         id={`${item}_wtp_LowerT`}
                         label=''
                         type="number"
                         required={true}
-                        value={lowerT} // Bind the value to the prop
-                        onChange={(e) => setLowerT(e.target.value)} // Update state
+                        value={lowerT}
+                        onChange={(e) => setLowerT(e.target.value)}
                     />
                     
-                    <p>At what price would you consider the burger was becoming expensive and although not out of question?</p>
+                    <p>At what price would you consider the burger was becoming <span className="font-bold">expensive and although not out of question</span>?</p>
                     <InputQuestion
                         ref={inputRefs[`${item}_wtp_upperB`]}
                         id={`${item}_wtp_upperB`}
                         label=''
                         type="number"
                         required={true}
-                        value={upperB} // Bind the value to the prop
-                        onChange={(e) => setUpperB(e.target.value)} // Update state
+                        value={upperB}
+                        onChange={(e) => setUpperB(e.target.value)}
                     />
                     
-                    <p>At what price would you consider the burger a bargain - a great buy for the money?</p>
+                    <p>At what price would you consider the burger a <span className="font-bold">bargain - a great buy for the money</span>?</p>
                     <InputQuestion
                         ref={inputRefs[`${item}_wtp_lowerb`]}
                         id={`${item}_wtp_lowerb`}
                         label=''
                         type="number"
                         required={true}
-                        value={lowerb} // Bind the value to the prop
-                        onChange={(e) => setLowerb(e.target.value)} // Update state
+                        value={lowerb}
+                        onChange={(e) => setLowerb(e.target.value)}
                     />
                     
-                    <p>What would the market price without any discounts be?</p>
+                    <p>What would the <span className="font-bold">market</span> price without any discounts be?</p>
                     <InputQuestion
                         ref={inputRefs[`${item}_wtp_guess`]}
                         id={`${item}_wtp_guess`}
                         label=''
                         type="number"
                         required={true}
-                        value={guess} // Bind the value to the prop
-                        onChange={(e) => setGuess(e.target.value)} // Update state
+                        value={guess}
+                        onChange={(e) => setGuess(e.target.value)}
                     />
                 </div>
             </div>

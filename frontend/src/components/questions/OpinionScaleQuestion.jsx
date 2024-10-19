@@ -7,7 +7,7 @@ const OpinionScaleQuestion = forwardRef(({ id, value, onChange, required = false
           {id.charAt(0).toUpperCase() + id.slice(1)}
         </label>
         <input
-          className="range"
+          className="range range-success"
           ref={ref}
           id={id}
           type="range"
@@ -18,7 +18,7 @@ const OpinionScaleQuestion = forwardRef(({ id, value, onChange, required = false
           onChange={onChange}
           step="1"
         />
-        <div className="flex justify-between px-2 text-xs">
+        <div className="flex justify-between px-2 text-xs font-bold">
           <span>1</span>
           <span>2</span>
           <span>3</span>

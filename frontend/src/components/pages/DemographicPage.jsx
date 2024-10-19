@@ -90,7 +90,7 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, frequenc
           <InputQuestion
             ref={inputRefs.age}
             id="age"
-            label="Age"
+            label="How old are you?"
             type="number"
             required={true}
             value={age}
@@ -103,7 +103,7 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, frequenc
           <SingleChoiceQuestion
             ref={inputRefs.gender}
             id="gender"
-            label="Gender"
+            label="What's your gender?"
             value={gender}
             onChange={(e) => setGender(e.target.value)}
             options={[
@@ -119,7 +119,7 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, frequenc
           <SingleChoiceQuestion
             ref={inputRefs.income}
             id="income"
-            label="Income"
+            label="What' s your income?"
             value={income}
             onChange={(e) => setIncome(e.target.value)}
             options={[
@@ -136,16 +136,13 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, frequenc
           <SingleChoiceQuestion
             ref={inputRefs.geolocation}
             id="geolocation"
-            label="Geolocation"
+            label="Where do you live?"
             value={geolocation}
             onChange={(e) => setGeolocation(e.target.value)}
             options={[
-              { value: 'north_america', label: 'North America' },
-              { value: 'south_america', label: 'South America' },
-              { value: 'europe', label: 'Europe' },
-              { value: 'asia', label: 'Asia' },
-              { value: 'africa', label: 'Africa' },
-              { value: 'oceania', label: 'Oceania' },
+              { value: 'village', label: 'Village' },
+              { value: 'small_town', label: 'Small Town' },
+              { value: 'big_town', label: 'Big Town' }
             ]}
             required={true}
           />

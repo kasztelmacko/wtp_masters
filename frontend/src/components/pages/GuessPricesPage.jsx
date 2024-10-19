@@ -52,21 +52,21 @@ const GuessPricesPage = ({ inputRefs, burger, burger_premium, bundle, setBurger,
     const items = [
         {
             id: 'burger',
-            item_name: 'Classic Burger',
-            item_description: 'A delicious classic burger with lettuce, tomato, and cheese.',
-            img_url: 'https://kkpcuktyelbwgigadulx.supabase.co/storage/v1/object/public/item_photos/bundle_classic.png?t=2024-10-17T17%3A35%3A25.055Z',
+            item_name: 'WieśMac',
+            item_description: 'A delicious classic burger with lettuce, tomato, and cheese',
+            img_url: 'https://kkpcuktyelbwgigadulx.supabase.co/storage/v1/object/public/item_photos/wies-mac-removebg-preview%20(2).png?t=2024-10-19T16%3A32%3A26.389Z',
         },
         {
             id: 'burger_premium',
-            item_name: 'Premium Burger',
-            item_description: 'A premium burger with extra toppings and sauces.',
-            img_url: 'https://kkpcuktyelbwgigadulx.supabase.co/storage/v1/object/public/item_photos/bundle_classic.png?t=2024-10-17T17%3A35%3A25.055Z',
+            item_name: 'Maestro Grand Classic',
+            item_description: 'A classic burger with 100% beef, crunchy becon, cheddar cheese and fresh vegetables',
+            img_url: 'https://kkpcuktyelbwgigadulx.supabase.co/storage/v1/object/public/item_photos/burger_premium_mac.png?t=2024-10-19T16%3A35%3A11.206Z',
         },
         {
             id: 'bundle',
-            item_name: 'Family Bundle',
-            item_description: 'A family bundle with burgers, fries, and drinks.',
-            img_url: 'https://kkpcuktyelbwgigadulx.supabase.co/storage/v1/object/public/item_photos/bundle_classic.png?t=2024-10-17T17%3A35%3A25.055Z',
+            item_name: 'McZestaw WieśMac',
+            item_description: 'A bundle with WieśMac burger, fries, and drink',
+            img_url: 'https://kkpcuktyelbwgigadulx.supabase.co/storage/v1/object/public/item_photos/bundle_mac.png?t=2024-10-19T16%3A38%3A30.113Z',
         }
     ];
 
