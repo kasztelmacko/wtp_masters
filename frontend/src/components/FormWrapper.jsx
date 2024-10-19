@@ -7,7 +7,7 @@ const FormWrapper = ({ onSubmit, onNext, isLastPage, children }) => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen w-full">
+    <div className="flex justify-center h-screen w-full">
       <form onSubmit={handleSubmit} className='w-full h-2/5 flex flex-col justify-between p-4'>
         <div className='flex flex-col items-center'>
           {children}

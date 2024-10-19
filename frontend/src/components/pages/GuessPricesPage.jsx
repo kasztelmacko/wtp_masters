@@ -72,7 +72,7 @@ const GuessPricesPage = ({ inputRefs, burger, burger_premium, bundle, setBurger,
 
     return (
         <FormWrapper onSubmit={handleSubmit} isLastPage={true}>
-            <div className="flex flex-wrap justify-between">
+            <div className="flex justify-between">
                 {items.map((item, index) => (
                     <GuessPriceQuestion
                         key={item.id}

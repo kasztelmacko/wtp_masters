@@ -5,8 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import ahpy
 
 from schemas import (DemographicQuestions, 
-                     AHPQuestions, 
-                     ConsumerBehaviorQuestions, 
+                     AHPQuestions,  
                      CompetitorRatingQuestions, 
                      NewBrandExpectationQuestions, 
                      MarketAwarenessQuestions,
@@ -34,7 +33,9 @@ async def demographic_questions(demographic_questions: DemographicQuestions):
         "age": demographic_questions.age.validate_serialize_response(demographic_questions.age.question_text), 
         "gender": demographic_questions.gender.validate_serialize_response(demographic_questions.gender.question_text),
         "income": demographic_questions.income.validate_serialize_response(demographic_questions.income.question_text),
-        "geolocation": demographic_questions.geolocation.validate_serialize_response(demographic_questions.geolocation.question_text)
+        "geolocation": demographic_questions.geolocation.validate_serialize_response(demographic_questions.geolocation.question_text),
+        "frequency_of_fast_food_dining": demographic_questions.frequency_of_fast_food_dining.validate_serialize_response(demographic_questions.frequency_of_fast_food_dining.question_text),
+        "monthly_spenditure_on_fast_food": demographic_questions.monthly_spenditure_on_fast_food.validate_serialize_response(demographic_questions.monthly_spenditure_on_fast_food.question_text)
     }
 
     values, columns = get_values_and_columns(response)
@@ -90,19 +91,6 @@ async def ahp_questions(ahp_questions: AHPQuestions):
     return 
 
 
-@app.post("/api/consumer-behavior-questions")
-async def consumer_behavior_questions(consumer_behavior_questions: ConsumerBehaviorQuestions):
-    response = {
-        "frequency_of_fast_food_dining": consumer_behavior_questions.frequency_of_fast_food_dining.validate_serialize_response(consumer_behavior_questions.frequency_of_fast_food_dining.question_text),
-        "monthly_spenditure_on_fast_food": consumer_behavior_questions.monthly_spenditure_on_fast_food.validate_serialize_response(consumer_behavior_questions.monthly_spenditure_on_fast_food.question_text)
-    }
-
-    values, columns = get_values_and_columns(response)
-    save_input("SurveyResponses", responder_id, values, columns)
-
-    return JSONResponse(content=response)
-
-
 @app.post("/api/competitor-rating-questions")
 async def competitor_rating(competitor_rating: CompetitorRatingQuestions):
     response = {
@@ -155,10 +143,13 @@ async def guess_prices(guessed_prices: GuessPricesQuestion):
 
 @app.post("/api/direct-wtp-questions")
 async def direct_wtp(direct_wtp: DirectWTPQuestions):
+    item = direct_wtp.item
     response = {
-        "direct_wtp_burger": direct_wtp.burger_wtp.validate_serialize_response(direct_wtp.burger_wtp.question_text),
-        "direct_wtp_burger_premium": direct_wtp.burger_premium_wtp.validate_serialize_response(direct_wtp.burger_premium_wtp.question_text),
-        "direct_wtp_bundle": direct_wtp.bundle_wtp.validate_serialize_response(direct_wtp.bundle_wtp.question_text)
+        f"{item}_wtp_UpperT": direct_wtp.wtp_UpperT.validate_serialize_response(direct_wtp.wtp_UpperT.question_text),
+        f"{item}_wtp_LowerT": direct_wtp.wtp_LowerT.validate_serialize_response(direct_wtp.wtp_LowerT.question_text),
+        f"{item}_wtp_upperB": direct_wtp.wtp_upperB.validate_serialize_response(direct_wtp.wtp_upperB.question_text),
+        f"{item}_wtp_lowerB": direct_wtp.wtp_lowerB.validate_serialize_response(direct_wtp.wtp_lowerB.question_text),
+        f"{item}_wtp_guess": direct_wtp.wtp_guess.validate_serialize_response(direct_wtp.wtp_guess.question_text),
     }
 
     values, columns = get_values_and_columns(response)

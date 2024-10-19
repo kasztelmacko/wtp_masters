@@ -54,6 +54,14 @@ const AHPPage = ({ onSubmit }) => {
   };
 
   const nextPage = () => {
+    const currentQuestion = questions[currentQuestionIndex];
+    const inputRef = questionRefs.current[currentQuestion.id];
+
+    if (inputRef && inputRef.current && !inputRef.current.value) {
+      alert('Please select an answer before proceeding.');
+      return;
+    }
+
     saveCurrentAnswer();
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
@@ -86,6 +94,7 @@ const AHPPage = ({ onSubmit }) => {
             ref={questionRefs.current[question.id]}
             criteria={question.criteria}
             id={question.id}
+            required={true}
           />
         )
       ))}

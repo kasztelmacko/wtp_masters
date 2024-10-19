@@ -11,6 +11,8 @@ class DemographicQuestions(BaseModel):
     gender: SingleChoiceQuestion
     income: SingleChoiceQuestion
     geolocation: SingleChoiceQuestion
+    frequency_of_fast_food_dining: SingleChoiceQuestion
+    monthly_spenditure_on_fast_food: SingleChoiceQuestion
 
 class AHPQuestions(BaseModel):
     brand_recognition_vs_brand_recall: AHPChoiceQuestion
@@ -33,10 +35,6 @@ class AHPQuestions(BaseModel):
 
     logo_vs_utilitarian_benefits: AHPChoiceQuestion
 
-class ConsumerBehaviorQuestions(BaseModel):
-    frequency_of_fast_food_dining: SingleChoiceQuestion
-    monthly_spenditure_on_fast_food: SingleChoiceQuestion
-
 class CompetitorRatingQuestions(BaseModel):
     taste: OpinionScaleQuestion
     atmosphere: OpinionScaleQuestion
@@ -56,9 +54,12 @@ class GuessPricesQuestion(BaseModel):
     bundle: InputQuestion
 
 class DirectWTPQuestions(BaseModel):
-    burger_wtp: InputQuestion
-    burger_premium_wtp: InputQuestion
-    bundle_wtp: InputQuestion
+    item: str
+    wtp_UpperT: InputQuestion
+    wtp_LowerT: InputQuestion
+    wtp_upperB: InputQuestion
+    wtp_lowerB: InputQuestion
+    wtp_guess: InputQuestion
 
 class CBCWTPQuestions(BaseModel):
     question_1: CBCQuestion

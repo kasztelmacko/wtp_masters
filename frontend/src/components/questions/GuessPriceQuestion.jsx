@@ -4,7 +4,7 @@ import InputQuestion from './InputQuestion';
 const GuessPriceQuestion = ({ item, inputRef, value, onChange }) => {
     return (
         <div className="flex flex-col items-center mb-4 mx-2">
-            <div className="h-full relative group flex flex-col border rounded-lg shadow-md p-4">
+            <div className="h-full relative group flex flex-col border rounded-lg shadow-md p-4 w-full max-w-xs">
                 <div className="h-48 w-full">
                     <img 
                         className="rounded-t-lg w-full h-full object-cover" 

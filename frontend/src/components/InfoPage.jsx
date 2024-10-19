@@ -10,10 +10,11 @@ import { RATING_NB_PAGE } from '../constants/rating_nb_page';
 const InfoPage = ({ currentPage }) => {
     const INFO_TEXT = [
         MAIN_PAGE,
-        MAIN_PAGE,
         MARKET_AWARENESS_PAGE,
         MARKET_AWARENESS_PAGE,
         AHP_PAGE,
+        OE_PAGE,
+        OE_PAGE,
         OE_PAGE,
         CBC_PAGE,
         RATING_C_PAGE,

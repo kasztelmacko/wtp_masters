@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import AHPPage from './components/pages/AHPPage';
 import DemographicPage from './components/pages/DemographicPage';
-import ConsumerBehaviorPage from './components/pages/ConsumerBehaviorPage';
 import RatingPage from './components/pages/RatingPage';
 import MarketAwarenessPage from './components/pages/MarketAwarenessPage';
 import GuessPricesPage from './components/pages/GuessPricesPage';
@@ -15,8 +14,6 @@ function App() {
   const [gender, setGender] = useState('');
   const [income, setIncome] = useState('');
   const [geolocation, setGeolocation] = useState('');
-  
-  // New state for ConsumerBehaviorPage
   const [frequency_of_fast_food_dining, setFrequencyOfFastFoodDining] = useState('');
   const [monthly_spenditure_on_fast_food, setMonthlySpenditureOnFastFood] = useState('');
 
@@ -39,9 +36,9 @@ function App() {
   const [bundle, setBundle] = useState(0);
 
   // New state for WTPDirectPage
-  const [burger_wtp, setBurgerWTP] = useState(0);
-  const [burger_premium_wtp, setBurgerPremiumWTP] = useState(0);
-  const [bundle_wtp, setBundleWTP] = useState(0);
+  const [burger_wtp, setBurgerWTP] = useState({ upperT: '', lowerT: '', upperB: '', lowerb: '', guess: '' });
+  const [burger_premium_wtp, setBurgerPremiumWTP] = useState({ upperT: '', lowerT: '', upperB: '', lowerb: '', guess: '' });
+  const [bundle_wtp, setBundleWTP] = useState({ upperT: '', lowerT: '', upperB: '', lowerb: '', guess: '' });
 
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -64,9 +61,23 @@ function App() {
     burger_premium: useRef(null),
     bundle: useRef(null),
 
-    burger_wtp: useRef(null),
-    burger_premium_wtp: useRef(null),
-    bundle_wtp: useRef(null),
+    burger_wtp_UpperT: useRef(null),
+    burger_wtp_LowerT: useRef(null),
+    burger_wtp_upperB: useRef(null),
+    burger_wtp_lowerb: useRef(null),
+    burger_wtp_guess: useRef(null),
+
+    burger_premium_wtp_UpperT: useRef(null),
+    burger_premium_wtp_LowerT: useRef(null),
+    burger_premium_wtp_upperB: useRef(null),
+    burger_premium_wtp_lowerb: useRef(null),
+    burger_premium_wtp_guess: useRef(null),
+
+    bundle_wtp_UpperT: useRef(null),
+    bundle_wtp_LowerT: useRef(null),
+    bundle_wtp_upperB: useRef(null),
+    bundle_wtp_lowerb: useRef(null),
+    bundle_wtp_guess: useRef(null),
 
   };
 
@@ -87,36 +98,28 @@ function App() {
           gender={gender} 
           income={income} 
           geolocation={geolocation} 
+          frequency_of_fast_food_dining={frequency_of_fast_food_dining}
+          monthly_spenditure_on_fast_food={monthly_spenditure_on_fast_food}
           setAge={setAge} 
           setGender={setGender} 
           setIncome={setIncome} 
           setGeolocation={setGeolocation} 
-          onSubmit={handleNextPage}
-        />
-        )}
-
-        {/* AHP Page with Questions */}
-        {currentPage === 4 && (
-        <AHPPage criteriaList={[
-        ]} 
-        onSubmit={handleNextPage}
-        />
-        )}
-
-        {/* Add ConsumerBehaviorPage component here */}
-        {currentPage === 1 && (
-        <ConsumerBehaviorPage 
-          inputRefs={inputRefs} 
-          frequency_of_fast_food_dining={frequency_of_fast_food_dining}
-          monthly_spenditure_on_fast_food={monthly_spenditure_on_fast_food}
           setFrequencyOfFastFoodDining={setFrequencyOfFastFoodDining}
           setMonthlySpenditureOnFastFood={setMonthlySpenditureOnFastFood}
           onSubmit={handleNextPage}
         />
         )}
 
+        {/* AHP Page with Questions */}
+        {currentPage === 3 && (
+        <AHPPage criteriaList={[
+        ]} 
+        onSubmit={handleNextPage}
+        />
+        )}
+
         {/* Competitor Rating Page */}
-        {currentPage === 7 && (
+        {currentPage === 9 && (
         <RatingPage 
           inputRefs={inputRefs}
           taste={competitor_taste}
@@ -146,7 +149,7 @@ function App() {
         )}
 
         {/* Market Awareness Page */}
-        {currentPage === 2 && (
+        {currentPage === 1 && (
         <MarketAwarenessPage 
           inputRefs={inputRefs}
           recognizedCompetitors={recognizedCompetitors}
@@ -155,7 +158,7 @@ function App() {
         />
         )}
 
-        {currentPage === 3 && (
+        {currentPage === 2 && (
         <GuessPricesPage
           inputRefs={inputRefs}
           burger={burger}
@@ -168,22 +171,64 @@ function App() {
         />
         )}
 
+        {currentPage === 4 && (
+            <WTPDirectPage 
+              inputRefs={inputRefs} // Pass the entire inputRefs object
+              upperT={burger_wtp.upperT}
+              setUpperT={(value) => setBurgerWTP({ ...burger_wtp, upperT: value })}
+              lowerT={burger_wtp.lowerT}
+              setLowerT={(value) => setBurgerWTP({ ...burger_wtp, lowerT: value })}
+              upperB={burger_wtp.upperB}
+              setUpperB={(value) => setBurgerWTP({ ...burger_wtp, upperB: value })}
+              lowerb={burger_wtp.lowerb}
+              setLowerb={(value) => setBurgerWTP({ ...burger_wtp, lowerb: value })}
+              guess={burger_wtp.guess}
+              setGuess={(value) => setBurgerWTP({ ...burger_wtp, guess: value })}
+              onSubmit={handleNextPage}
+              item="burger"
+            />
+        )}
+
         {currentPage === 5 && (
         <WTPDirectPage 
-          inputRefs={inputRefs}
-          burger_wtp={burger_wtp}
-          burger_premium_wtp={burger_premium_wtp}
-          bundle_wtp={bundle_wtp}
-          setBurgerWTP={setBurgerWTP}
-          setBurgerPremiumWTP={setBurgerPremiumWTP}
-          setBundleWTP={setBundleWTP}
-          onSubmit={handleNextPage}
+            inputRefs={inputRefs} // Pass the entire inputRefs object
+            upperT={burger_premium_wtp.upperT}
+            setUpperT={(value) => setBurgerPremiumWTP({ ...burger_premium_wtp, upperT: value })}
+            lowerT={burger_premium_wtp.lowerT}
+            setLowerT={(value) => setBurgerPremiumWTP({ ...burger_premium_wtp, lowerT: value })}
+            upperB={burger_premium_wtp.upperB}
+            setUpperB={(value) => setBurgerPremiumWTP({ ...burger_premium_wtp, upperB: value })}
+            lowerb={burger_premium_wtp.lowerb}
+            setLowerb={(value) => setBurgerPremiumWTP({ ...burger_premium_wtp, lowerb: value })}
+            guess={burger_premium_wtp.guess}
+            setGuess={(value) => setBurgerPremiumWTP({ ...burger_premium_wtp, guess: value })}
+            onSubmit={handleNextPage}
+            item="burger_premium"
         />
         )}
 
         {currentPage === 6 && (
+            <WTPDirectPage 
+            inputRefs={inputRefs} // Pass the entire inputRefs object
+            upperT={bundle_wtp.upperT}
+            setUpperT={(value) => setBundleWTP({ ...bundle_wtp, upperT: value })}
+            lowerT={bundle_wtp.lowerT}
+            setLowerT={(value) => setBundleWTP({ ...bundle_wtp, lowerT: value })}
+            upperB={bundle_wtp.upperB}
+            setUpperB={(value) => setBundleWTP({ ...bundle_wtp, upperB: value })}
+            lowerb={bundle_wtp.lowerb}
+            setLowerb={(value) => setBundleWTP({ ...bundle_wtp, lowerb: value })}
+            guess={bundle_wtp.guess}
+            setGuess={(value) => setBundleWTP({ ...bundle_wtp, guess: value })}
+            onSubmit={handleNextPage}
+            item="bundle"
+        />
+        )}
+
+        {currentPage === 7 && (
         <WTPCBCPage 
           inputRefs={inputRefs}
+          onSubmit={handleNextPage}
         />
         )}
       </div>

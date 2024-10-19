@@ -3,7 +3,7 @@ import axios from 'axios';
 import CBCQuestion from '../questions/CBCQuestion';
 import FormWrapper from '../FormWrapper';
 
-const WTPCBCPage = () => {
+const WTPCBCPage = ({ onSubmit }) => {
     const [questions, setQuestions] = useState([]);
     const [responses, setResponses] = useState({});
     const [currentPage, setCurrentPage] = useState(0);
@@ -49,6 +49,7 @@ const WTPCBCPage = () => {
             console.log('Payload being sent:', WTPCBCQuestions);
             const response = await axios.post('http://127.0.0.1:8000/api/cbc-wtp-questions', WTPCBCQuestions);
             console.log(response.data);
+            onSubmit();
         } catch (error) {
             console.error("Error posting consumer behavior questions:", error);
         }
@@ -62,6 +63,15 @@ const WTPCBCPage = () => {
     };
 
     const nextPage = () => {
+        const currentQuestion = Object.values(groupedQuestions)[currentPage];
+        if (currentQuestion) {
+            const selectedValue = responses[currentQuestion[0].question_id];
+            if (selectedValue === undefined) {
+                alert('Please select an answer before proceeding.');
+                return;
+            }
+        }
+
         if (currentPage < Object.keys(groupedQuestions).length - 1) {
             setCurrentPage(currentPage + 1);
         }
