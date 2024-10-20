@@ -2,7 +2,7 @@ import React from 'react';
 
 export const MAIN_PAGE = [
     <div class="flex flex-col items-center justify-center h-full bg-bg-primary col-span-3">
-        <div className="flex-grow text-xl" key="0">
+        <div className="flex-grow" key="0">
             <div>
             You will take part in a study on the determinants of how much people are willing to pay for meals in new a fast food brand.
             </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 export const AHP_PAGE = [
     <div class="flex flex-col items-center justify-center h-full bg-bg-primary col-span-3">
-        <div className="flex-grow text-xl" key="0">
+        <div className="flex-grow" key="0">
             <div>
                 This part of the study is trying to find your priorities and preferences for decision-making when you deal with a new unknown product/brand.
             </div>

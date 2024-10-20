@@ -31,9 +31,9 @@ function App() {
   const [recognizedCompetitors, setRecognizedCompetitors] = useState([]);
 
   // New state for GuessPricesPage
-  const [burger, setBurger] = useState(0);
-  const [burger_premium, setBurgerPremium] = useState(0);
-  const [bundle, setBundle] = useState(0);
+  const [burger, setBurger] = useState("");
+  const [burger_premium, setBurgerPremium] = useState("");
+  const [bundle, setBundle] = useState("");
 
   // New state for WTPDirectPage
   const [burger_wtp, setBurgerWTP] = useState({ upperT: '', lowerT: '', upperB: '', lowerb: '', guess: '' });
@@ -89,11 +89,11 @@ function App() {
   };
 
   return (
-    <div className="flex h-screen">
-      <div className="w-5/12 border-r-4 border-black text-gray-700">
+    <div className="flex flex-col lg:flex-row h-full">
+      <div className="w-full lg:w-5/12 border-gray-700 border-b-2 lg:border-r-2 text-gray-700">
         <InfoPage currentPage={currentPage} />
       </div>
-      <div className="w-7/12"> 
+      <div className="w-full lg:w-7/12">
         {currentPage === 0 && (
         <DemographicPage 
           inputRefs={inputRefs} 

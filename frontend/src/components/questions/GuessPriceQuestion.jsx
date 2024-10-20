@@ -29,6 +29,7 @@ const GuessPriceQuestion = ({ item, inputRef, value, onChange }) => {
                 value={value}
                 onChange={onChange}
                 className="w-full"
+                placeholder="guess the price"
             />
             </div>
         </div>

@@ -60,10 +60,11 @@ const RatingPage = ({ inputRefs, taste, atmosphere, prices, setTaste, setAtmosph
     return (
         <FormWrapper onSubmit={handleSubmit} isLastPage={true}>
             <div className="w-full flex flex-col items-center space-y-4">
-                <div className="w-1/2">
+                <div className="w-3/4">
                     <OpinionScaleQuestion
                         ref={inputRefs.taste}
                         id="taste"
+                        label="How would you rate the food taste?"
                         value={taste}
                         onChange={(e) => setTaste(e.target.value)}
                         required
@@ -71,10 +72,11 @@ const RatingPage = ({ inputRefs, taste, atmosphere, prices, setTaste, setAtmosph
                         max_value={max_value}
                     />
                 </div>
-                <div className="w-1/2">
+                <div className="w-3/4">
                     <OpinionScaleQuestion
                         ref={inputRefs.atmosphere}
                         id="atmosphere"
+                        label="How do you fell about the restaurant?"
                         value={atmosphere}
                         onChange={(e) => setAtmosphere(e.target.value)}
                         required
@@ -82,10 +84,11 @@ const RatingPage = ({ inputRefs, taste, atmosphere, prices, setTaste, setAtmosph
                         max_value={max_value}
                     />
                 </div>
-                <div className="w-1/2">
+                <div className="w-3/4">
                     <OpinionScaleQuestion
                         ref={inputRefs.prices}
                         id="prices"
+                        label="What do you think about the price levels?"
                         value={prices}
                         onChange={(e) => setPrices(e.target.value)}
                         required

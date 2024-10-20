@@ -24,11 +24,11 @@ const InfoPage = ({ currentPage }) => {
         END_PAGE
     ]
 
-  return (
-    <div className="info-page h-full p-10">
-      {INFO_TEXT[currentPage]}
-    </div>
-  );
-};
+    return (
+      <div className="info-page h-screen p-10 text-md 2xl:text-xl">
+        {INFO_TEXT[currentPage]}
+      </div>
+    );
+  };
 
 export default InfoPage;

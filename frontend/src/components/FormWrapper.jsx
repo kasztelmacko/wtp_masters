@@ -4,6 +4,7 @@ const FormWrapper = ({ onSubmit, onNext, isLastPage, children }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit();
+    window.scrollTo(0, 0);
   };
 
   return (

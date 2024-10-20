@@ -2,7 +2,7 @@ import React from 'react';
 
 export const OE_PAGE = [
     <div class="flex flex-col items-center justify-center h-full bg-bg-primary col-span-3">
-        <div className="flex-grow text-xl" key="0">
+        <div className="flex-grow" key="0">
             <div>
                 This part of the study is asking directly about how much would you be willing to pay for a certain fast food product.
             </div>
