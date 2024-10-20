@@ -3,7 +3,7 @@ import axios from 'axios';
 import FormWrapper from '../FormWrapper';
 import GuessPriceQuestion from '../questions/GuessPriceQuestion'; // Import the GuessPriceQuestion component
 
-const GuessPricesPage = ({ inputRefs, burger, burger_premium, bundle, setBurger, setBurgerPremium, setBundle, onSubmit }) => {
+const GuessPricesPage = ({ inputRefs, burger, burger_premium, bundle, setBurger, setBurgerPremium, setBundle, onSubmit, responderId }) => {
     const handleSubmit = async () => {
         onSubmit();
 
@@ -42,8 +42,8 @@ const GuessPricesPage = ({ inputRefs, burger, burger_premium, bundle, setBurger,
         }, {});
 
         try {
-            console.log('Payload being sent:', GuessPricesQuestions);
-            const response = await axios.post('http://127.0.0.1:8000/api/guess-prices-questions', GuessPricesQuestions);
+            console.log('Payload being sent:', { responder_id: responderId, ...GuessPricesQuestions }); // Include responderId
+            const response = await axios.post('http://127.0.0.1:8000/api/guess-prices-questions', { responder_id: responderId, ...GuessPricesQuestions });
         } catch (error) {
             console.error('Error sending question:', error);
         }

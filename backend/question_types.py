@@ -85,6 +85,6 @@ class OpinionScaleQuestion(Question):
 class CBCQuestion(Question):
     alternative: int
     profile: int
-    respondent_id: int
+    responder_id: int
     question_id: int
 

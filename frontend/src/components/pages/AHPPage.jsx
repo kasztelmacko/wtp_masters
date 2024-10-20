@@ -3,7 +3,7 @@ import axios from 'axios';
 import AHPQuestion from '../questions/AHPQuestion';
 import FormWrapper from '../FormWrapper';
 
-const AHPPage = ({ onSubmit }) => {
+const AHPPage = ({ onSubmit, responderId }) => {
   const questions = [
     { id: "brand_recognition_vs_brand_recall", criteria: ["Brand Recognition", "Brand Recall"] },
     { id: "brand_recognition_vs_brand_past_purchase_or_use", criteria: ["Brand Recognition", "Brand Past Purchase or Use"] },
@@ -74,8 +74,8 @@ const AHPPage = ({ onSubmit }) => {
     const finalAnswers = saveCurrentAnswer();
 
     try {
-      console.log('Payload being sent:', finalAnswers);
-      const response = await axios.post('http://127.0.0.1:8000/api/ahp-questions', finalAnswers);
+      console.log('Payload being sent:', { responder_id: responderId, ...finalAnswers }); // Include responderId
+      const response = await axios.post('http://127.0.0.1:8000/api/ahp-questions', { responder_id: responderId, ...finalAnswers });
       console.log('Response from server:', response.data);
       onSubmit();
     } catch (error) {

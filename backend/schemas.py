@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Dict
 from question_types import (SingleChoiceQuestion, 
                             MultipleChoiceQuestion, 
                             OpinionScaleQuestion, 
@@ -7,6 +8,7 @@ from question_types import (SingleChoiceQuestion,
                             CBCQuestion)
 
 class DemographicQuestions(BaseModel):
+    responder_id: int
     age: InputQuestion
     gender: SingleChoiceQuestion
     income: SingleChoiceQuestion
@@ -15,6 +17,7 @@ class DemographicQuestions(BaseModel):
     monthly_spenditure_on_fast_food: SingleChoiceQuestion
 
 class AHPQuestions(BaseModel):
+    responder_id: int
     brand_recognition_vs_brand_recall: AHPChoiceQuestion
     brand_recognition_vs_brand_past_purchase_or_use: AHPChoiceQuestion
     brand_recognition_vs_emotional_perception_of_the_brand: AHPChoiceQuestion
@@ -36,24 +39,29 @@ class AHPQuestions(BaseModel):
     logo_vs_utilitarian_benefits: AHPChoiceQuestion
 
 class CompetitorRatingQuestions(BaseModel):
+    responder_id: int
     taste: OpinionScaleQuestion
     atmosphere: OpinionScaleQuestion
     prices: OpinionScaleQuestion
 
 class NewBrandExpectationQuestions(BaseModel):
+    responder_id: int
     taste: OpinionScaleQuestion
     atmosphere: OpinionScaleQuestion
     prices: OpinionScaleQuestion
 
 class MarketAwarenessQuestions(BaseModel):
+    responder_id: int
     recognized_competitors: MultipleChoiceQuestion
 
 class GuessPricesQuestion(BaseModel):
+    responder_id: int
     burger: InputQuestion
     burger_premium: InputQuestion
     bundle: InputQuestion
 
 class DirectWTPQuestions(BaseModel):
+    responder_id: int
     item: str
     wtp_UpperT: InputQuestion
     wtp_LowerT: InputQuestion
@@ -62,9 +70,5 @@ class DirectWTPQuestions(BaseModel):
     wtp_guess: InputQuestion
 
 class CBCWTPQuestions(BaseModel):
-    question_1: CBCQuestion
-    question_2: CBCQuestion
-    question_3: CBCQuestion
-    question_4: CBCQuestion
-    question_5: CBCQuestion
-    question_6: CBCQuestion
+    responder_id: int
+    WTPCBCQuestions: Dict[str, CBCQuestion]

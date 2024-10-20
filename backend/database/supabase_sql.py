@@ -39,3 +39,25 @@ def save_input(table_name: str, respondent_id: int, values: List[str], columns: 
 
     response = supabase.table(table_name).upsert(data).execute()
     return response
+
+def get_free_respondent_ids():
+    response = supabase.table("respondent_ids").select("respondent_id").eq("status", "free").execute()
+    return response
+
+def change_respondent_status(respondent_id: int, status: str):
+    response = supabase.table("respondent_ids").update({"status": status}) \
+        .eq("respondent_id", respondent_id) \
+        .execute()
+    return response
+
+def assign_free_respondent_id():
+    response = get_free_respondent_ids()
+    if response.data:
+        free_ids = [resp['respondent_id'] for resp in response.data]
+        responder_id = min(free_ids)
+        print("responder", responder_id)
+        
+        change_respondent_status(responder_id, "active")
+        
+        return responder_id
+    return None

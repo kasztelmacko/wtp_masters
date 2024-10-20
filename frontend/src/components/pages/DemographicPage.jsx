@@ -4,7 +4,7 @@ import InputQuestion from '../questions/InputQuestion';
 import SingleChoiceQuestion from '../questions/SingleChoiceQuestion';
 import FormWrapper from '../FormWrapper';
 
-const DemographicPage = ({ inputRefs, age, gender, income, geolocation, frequency_of_fast_food_dining, monthly_spenditure_on_fast_food, setAge, setGender, setIncome, setGeolocation, setFrequencyOfFastFoodDining, setMonthlySpenditureOnFastFood, onSubmit }) => {
+const DemographicPage = ({ inputRefs, age, gender, income, geolocation, frequency_of_fast_food_dining, monthly_spenditure_on_fast_food, setAge, setGender, setIncome, setGeolocation, setFrequencyOfFastFoodDining, setMonthlySpenditureOnFastFood, responderId, onSubmit }) => {
   const handleSubmit = async () => {
     onSubmit(); 
 
@@ -74,9 +74,16 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, frequenc
       return acc;
     }, {});
 
+    // Include responderId in the payload
+    const payload = {
+      responder_id: responderId,
+      ...inputQuestions
+    };
+
     try {
-      console.log('Payload being sent:', inputQuestions);
-      const response = await axios.post('http://127.0.0.1:8000/api/demographic-questions', inputQuestions);
+      console.log('Payload being sent:', payload);
+      const response = await axios.post('http://127.0.0.1:8000/api/demographic-questions', payload);
+      console.log('Response:', response.data);
     } catch (error) {
       console.error('Error sending question:', error);
     }

@@ -3,7 +3,7 @@ import axios from 'axios';
 import OpinionScaleQuestion from '../questions/OpinionScaleQuestion';
 import FormWrapper from '../FormWrapper';
 
-const RatingPage = ({ inputRefs, taste, atmosphere, prices, setTaste, setAtmosphere, setPrices, api, onSubmit }) => {
+const RatingPage = ({ inputRefs, taste, atmosphere, prices, setTaste, setAtmosphere, setPrices, api, onSubmit, responderId }) => {
     const min_value = 0;
     const max_value = 4;
 
@@ -49,8 +49,8 @@ const RatingPage = ({ inputRefs, taste, atmosphere, prices, setTaste, setAtmosph
         }, {});
 
         try {
-            console.log('Payload being sent:', RatingQuestions);
-            const response = await axios.post('http://127.0.0.1:8000' + api, RatingQuestions);
+            console.log('Payload being sent:', { responder_id: responderId, ...RatingQuestions });
+            const response = await axios.post('http://127.0.0.1:8000' + api, { responder_id: responderId, ...RatingQuestions });
             console.log(response.data);
         } catch (error) {
             console.error("Error posting consumer behavior questions:", error);

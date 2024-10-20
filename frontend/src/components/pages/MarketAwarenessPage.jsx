@@ -3,7 +3,7 @@ import axios from 'axios';
 import MultipleChoiceQuestion from '../questions/MultipleChoiceQuestion';
 import FormWrapper from '../FormWrapper';
 
-const MarketAwarenessPage = ({ inputRefs, recognizedCompetitors = [], setRecognizedCompetitors, onSubmit }) => {
+const MarketAwarenessPage = ({ inputRefs, recognizedCompetitors = [], setRecognizedCompetitors, responderId, onSubmit }) => {
     const handleSubmit = async () => {
         onSubmit();
 
@@ -18,9 +18,19 @@ const MarketAwarenessPage = ({ inputRefs, recognizedCompetitors = [], setRecogni
             }
         };
 
+        console.log('Responder ID:', responderId);
+
         try {
-            console.log('Payload being sent:', MarketAwarenessQuestions);
-            const response = await axios.post('http://127.0.0.1:8000/api/market-awareness-questions', MarketAwarenessQuestions);
+            console.log('Payload being sent:', {
+                ...MarketAwarenessQuestions,
+                responder_id: responderId
+            });
+            const response = await axios.post('http://127.0.0.1:8000/api/market-awareness-questions', {
+                ...MarketAwarenessQuestions,
+                responder_id: responderId
+            }, {
+                withCredentials: true
+            });
             console.log(response.data);
         } catch (error) {
             console.error("Error posting market awareness questions:", error);

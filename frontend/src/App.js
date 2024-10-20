@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import AHPPage from './components/pages/AHPPage';
 import DemographicPage from './components/pages/DemographicPage';
 import RatingPage from './components/pages/RatingPage';
@@ -7,6 +7,7 @@ import GuessPricesPage from './components/pages/GuessPricesPage';
 import WTPDirectPage from './components/pages/WTPDirectPage';
 import WTPCBCPage from './components/pages/WTPCBCPage';
 import InfoPage from './components/InfoPage';
+import axios from 'axios';
 
 function App() {
   // New state for DemographicPage
@@ -42,6 +43,7 @@ function App() {
 
   const [currentPage, setCurrentPage] = useState(0);
 
+  const [responderId, setResponderId] = useState(null);
 
   const inputRefs = {
     age: useRef(null),
@@ -88,6 +90,20 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    const fetchResponderId = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/assign-responder-id', { withCredentials: true });
+        setResponderId(response.data.responder_id);
+        console.log('Responder ID:', response.data.responder_id);
+      } catch (error) {
+        console.error("Error fetching responder ID:", error);
+      }
+    };
+
+    fetchResponderId();
+  }, []);
+
   return (
     <div className="flex flex-col lg:flex-row h-full">
       <div className="w-full lg:w-5/12 border-gray-700 border-b-2 lg:border-r-2 text-gray-700">
@@ -109,6 +125,7 @@ function App() {
           setGeolocation={setGeolocation} 
           setFrequencyOfFastFoodDining={setFrequencyOfFastFoodDining}
           setMonthlySpenditureOnFastFood={setMonthlySpenditureOnFastFood}
+          responderId={responderId}
           onSubmit={handleNextPage}
         />
         )}
@@ -118,6 +135,7 @@ function App() {
         <AHPPage criteriaList={[
         ]} 
         onSubmit={handleNextPage}
+        responderId={responderId}
         />
         )}
 
@@ -132,6 +150,7 @@ function App() {
           setAtmosphere={setCAtmosphere}
           setPrices={setCPrices}
           api={"/api/competitor-rating-questions"}
+          responderId={responderId}
           onSubmit={handleNextPage}
         />
         )}
@@ -147,6 +166,7 @@ function App() {
           setAtmosphere={setNAtmosphere}
           setPrices={setNPrices}
           api={"/api/newbrand-rating-questions"}
+          responderId={responderId}
           onSubmit={handleNextPage}
         />
         )}
@@ -157,6 +177,7 @@ function App() {
           inputRefs={inputRefs}
           recognizedCompetitors={recognizedCompetitors}
           setRecognizedCompetitors={setRecognizedCompetitors}
+          responderId={responderId}
           onSubmit={handleNextPage}
         />
         )}
@@ -170,6 +191,7 @@ function App() {
           setBurger={setBurger}
           setBurgerPremium={setBurgerPremium}
           setBundle={setBundle}
+          responderId={responderId}
           onSubmit={handleNextPage}
         />
         )}
@@ -187,6 +209,7 @@ function App() {
               setLowerb={(value) => setBurgerWTP({ ...burger_wtp, lowerb: value })}
               guess={burger_wtp.guess}
               setGuess={(value) => setBurgerWTP({ ...burger_wtp, guess: value })}
+              responderId={responderId}
               onSubmit={handleNextPage}
               item="burger"
             />
@@ -205,6 +228,7 @@ function App() {
             setLowerb={(value) => setBurgerPremiumWTP({ ...burger_premium_wtp, lowerb: value })}
             guess={burger_premium_wtp.guess}
             setGuess={(value) => setBurgerPremiumWTP({ ...burger_premium_wtp, guess: value })}
+            responderId={responderId}
             onSubmit={handleNextPage}
             item="burger_premium"
         />
@@ -223,6 +247,7 @@ function App() {
             setLowerb={(value) => setBundleWTP({ ...bundle_wtp, lowerb: value })}
             guess={bundle_wtp.guess}
             setGuess={(value) => setBundleWTP({ ...bundle_wtp, guess: value })}
+            responderId={responderId}
             onSubmit={handleNextPage}
             item="bundle"
         />
@@ -231,6 +256,7 @@ function App() {
         {currentPage === 7 && (
         <WTPCBCPage 
           inputRefs={inputRefs}
+          responderId={responderId}
           onSubmit={handleNextPage}
         />
         )}

@@ -1,6 +1,8 @@
-from fastapi import FastAPI, Request
-from fastapi.responses import  JSONResponse
+from fastapi import FastAPI, Request, Depends, Response, Cookie
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi import HTTPException
+from fastapi.encoders import jsonable_encoder
 
 import ahpy
 
@@ -16,7 +18,9 @@ from schemas import (DemographicQuestions,
 from database.supabase_sql import (get_data, 
                                    save_choices, 
                                    save_input, 
-                                   get_values_and_columns)
+                                   get_values_and_columns,
+                                   assign_free_respondent_id,
+                                   change_respondent_status)
 
 
 app = FastAPI()
@@ -28,11 +32,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-responder_id = 2
+@app.get("/api/assign-responder-id")
+async def assign_responder_id(response: Response):
+    responder_id = assign_free_respondent_id()
+    return {"responder_id": responder_id} 
 
 @app.post("/api/demographic-questions")
 async def demographic_questions(demographic_questions: DemographicQuestions):
-    response = {
+
+    responder_id = demographic_questions.responder_id
+    
+    response_data = {
         "age": demographic_questions.age.validate_serialize_response(demographic_questions.age.question_text), 
         "gender": demographic_questions.gender.validate_serialize_response(demographic_questions.gender.question_text),
         "income": demographic_questions.income.validate_serialize_response(demographic_questions.income.question_text),
@@ -41,13 +51,16 @@ async def demographic_questions(demographic_questions: DemographicQuestions):
         "monthly_spenditure_on_fast_food": demographic_questions.monthly_spenditure_on_fast_food.validate_serialize_response(demographic_questions.monthly_spenditure_on_fast_food.question_text)
     }
 
-    values, columns = get_values_and_columns(response)
+    values, columns = get_values_and_columns(response_data)
     save_input("SurveyResponses", responder_id, values, columns)
-    return JSONResponse(content=response)
+    return JSONResponse(content=response_data)
 
 
 @app.post("/api/ahp-questions")
 async def ahp_questions(ahp_questions: AHPQuestions):
+
+    responder_id = ahp_questions.responder_id
+    
     response = {
         "brand_recognition_vs_brand_recall": {tuple(ahp_questions.brand_recognition_vs_brand_recall.criteria): ahp_questions.brand_recognition_vs_brand_recall.validate_serialize_response(ahp_questions.brand_recognition_vs_brand_recall.question_text)},
         "brand_recognition_vs_brand_past_purchase_or_use": {tuple(ahp_questions.brand_recognition_vs_brand_past_purchase_or_use.criteria): ahp_questions.brand_recognition_vs_brand_past_purchase_or_use.validate_serialize_response(ahp_questions.brand_recognition_vs_brand_past_purchase_or_use.question_text)},
@@ -91,11 +104,14 @@ async def ahp_questions(ahp_questions: AHPQuestions):
     values, columns = get_values_and_columns(mapped_weights)
     save_input("SurveyResponses", responder_id, values, columns)
     
-    return 
+    return JSONResponse(content={"message": "AHP questions processed."})
 
 
 @app.post("/api/competitor-rating-questions")
 async def competitor_rating(competitor_rating: CompetitorRatingQuestions):
+
+    responder_id = competitor_rating.responder_id
+    
     response = {
         "competitor_taste": competitor_rating.taste.validate_serialize_response(competitor_rating.taste.question_text),
         "competitor_atmosphere": competitor_rating.atmosphere.validate_serialize_response(competitor_rating.atmosphere.question_text),
@@ -109,6 +125,9 @@ async def competitor_rating(competitor_rating: CompetitorRatingQuestions):
 
 @app.post("/api/newbrand-rating-questions")
 async def newbrand_rating(newbrand_rating: NewBrandExpectationQuestions):
+    
+    responder_id = newbrand_rating.responder_id
+    
     response = {
         "new_brand_taste": newbrand_rating.taste.validate_serialize_response(newbrand_rating.taste.question_text),
         "new_brand_atmosphere": newbrand_rating.atmosphere.validate_serialize_response(newbrand_rating.atmosphere.question_text),
@@ -118,12 +137,17 @@ async def newbrand_rating(newbrand_rating: NewBrandExpectationQuestions):
     values, columns = get_values_and_columns(response)
     save_input("SurveyResponses", responder_id, values, columns)
 
+    change_respondent_status(int(responder_id), "finished")
+
     return JSONResponse(content=response)
 
 @app.post("/api/market-awareness-questions")
 async def market_awareness(market_awareness: MarketAwarenessQuestions):
+
+    responder_id = market_awareness.responder_id
+    
     response = {
-        "recognized_competitors": len(market_awareness.recognized_competitors.validate_serialize_response(market_awareness.recognized_competitors.question_text))/14
+        "recognized_competitors": len(market_awareness.recognized_competitors.validate_serialize_response(market_awareness.recognized_competitors.question_text)) / 14
     }
 
     values, columns = get_values_and_columns(response)
@@ -133,6 +157,9 @@ async def market_awareness(market_awareness: MarketAwarenessQuestions):
 
 @app.post("/api/guess-prices-questions")
 async def guess_prices(guessed_prices: GuessPricesQuestion):
+
+    responder_id = guessed_prices.responder_id
+    
     response = {
         "guessed_burger": guessed_prices.burger.validate_serialize_response(guessed_prices.burger.question_text),
         "guessed_burger_premium": guessed_prices.burger_premium.validate_serialize_response(guessed_prices.burger_premium.question_text),
@@ -146,6 +173,9 @@ async def guess_prices(guessed_prices: GuessPricesQuestion):
 
 @app.post("/api/direct-wtp-questions")
 async def direct_wtp(direct_wtp: DirectWTPQuestions):
+
+    responder_id = direct_wtp.responder_id
+    
     item = direct_wtp.item
     response = {
         f"{item}_wtp_UpperT": direct_wtp.wtp_UpperT.validate_serialize_response(direct_wtp.wtp_UpperT.question_text),
@@ -162,24 +192,29 @@ async def direct_wtp(direct_wtp: DirectWTPQuestions):
 
 @app.get("/api/cbc-wtp-questions")
 async def cbc_wtp_get(respondent_id: int):
+    
     questions = get_data(table_name="CBCSurvey", respondent_id=respondent_id)
     return questions
 
 @app.post("/api/cbc-wtp-questions")
 async def cbc_wtp_post(cbc_wtp: CBCWTPQuestions):
+    responder_id = cbc_wtp.responder_id
+    
     response = {}
     
-    for i in range(1, 7):
-        question_key = f"question_{i}"
-        question = getattr(cbc_wtp, question_key)
-
+    for question_key, question in cbc_wtp.WTPCBCQuestions.items():
         alternative_id = question.alternative
         question_id = question.question_id
-        save_choices(table_name="CBCSurvey", respondent_id=question.respondent_id, alternative_id=alternative_id, question_id=question_id)
+        
+        save_choices(table_name="CBCSurvey", respondent_id=responder_id, alternative_id=alternative_id, question_id=question_id)
         response[question_key] = alternative_id
 
     values, columns = get_values_and_columns(response)
     save_input("SurveyResponses", responder_id, values, columns)
     
     return JSONResponse(content=response)
+
+
+
+
 

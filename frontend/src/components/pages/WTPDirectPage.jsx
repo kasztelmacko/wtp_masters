@@ -16,7 +16,8 @@ const WTPDirectPage = ({
     guess, 
     setGuess, 
     onSubmit, 
-    item // New prop for item type
+    item,
+    responderId
 }) => {
 
     const itemOptions = {
@@ -52,6 +53,7 @@ const WTPDirectPage = ({
         onSubmit();
 
         const WTPDirectQuestions = {
+            responder_id: responderId,
             item: option.item_id,
             [`wtp_UpperT`]: {
                 input_type: inputRefs[`${item}_wtp_UpperT`].current.type,

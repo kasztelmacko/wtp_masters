@@ -3,17 +3,16 @@ import axios from 'axios';
 import CBCQuestion from '../questions/CBCQuestion';
 import FormWrapper from '../FormWrapper';
 
-const WTPCBCPage = ({ onSubmit }) => {
+const WTPCBCPage = ({ onSubmit, responderId }) => {
     const [questions, setQuestions] = useState([]);
     const [responses, setResponses] = useState({});
     const [currentPage, setCurrentPage] = useState(0);
     const inputRefs = useRef({});
-    const respondentId = 2;
 
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/cbc-wtp-questions?respondent_id=${respondentId}`);
+                const response = await axios.get(`http://127.0.0.1:8000/api/cbc-wtp-questions?respondent_id=${responderId}`);
                 console.log('Fetched questions:', response.data);
 
                 if (Array.isArray(response.data.data)) {
@@ -27,7 +26,7 @@ const WTPCBCPage = ({ onSubmit }) => {
         };
 
         fetchQuestions();
-    }, [respondentId]);
+    }, [responderId]);
 
     const handleSubmit = async () => {
         const WTPCBCQuestions = questions
@@ -40,14 +39,14 @@ const WTPCBCPage = ({ onSubmit }) => {
                     required: true,
                     alternative: question.alternative_id,
                     profile: question.profile_id,
-                    respondent_id: respondentId
+                    responder_id: responderId
                 };
                 return acc;
             }, {});
 
         try {
-            console.log('Payload being sent:', WTPCBCQuestions);
-            const response = await axios.post('http://127.0.0.1:8000/api/cbc-wtp-questions', WTPCBCQuestions);
+            console.log('Payload being sent:', {WTPCBCQuestions, responder_id: responderId});
+            const response = await axios.post('http://127.0.0.1:8000/api/cbc-wtp-questions', {WTPCBCQuestions, responder_id: responderId});
             console.log(response.data);
             onSubmit();
         } catch (error) {
