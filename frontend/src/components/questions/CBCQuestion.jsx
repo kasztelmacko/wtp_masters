@@ -10,7 +10,7 @@ const CBCQuestion = forwardRef(({ id, label, selectedValue, onChange, options, r
     const sortedOptions = [...options].sort((a, b) => a.no_choice - b.no_choice);
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-4 gap-4 w-full">
             {sortedOptions.map(option => (
                 <div 
                     className={`h-full w-full relative group flex flex-col border rounded-lg border-gray-300 min-w-[180px] max-w-[360px] lg:max-w-[240px] xl:max-w-[360px]`}
@@ -39,7 +39,7 @@ const CBCQuestion = forwardRef(({ id, label, selectedValue, onChange, options, r
                                         {option.portion_size} g, {option.calories} kcal
                                     </div>
                                     <div className="mt-auto flex items-center gap-x-1">
-                                        <div className="text-5xl font-bold tracking-tight text-gray-900">
+                                        <div className="text-4xl font-bold tracking-tight text-gray-900">
                                             {option.price} <span className="text-xl">zł</span>
                                         </div>
                                     </div>
