@@ -1,8 +1,8 @@
 import React from 'react';
 
 export const RATING_C_PAGE = [
-    <div class="flex flex-col items-center justify-center h-full bg-bg-primary col-span-3">
-        <div className="flex-grow" key="0">
+    <div className="flex flex-col items-center justify-center h-full bg-bg-primary col-span-3">
+        <div className="flex-grow" key="6">
         <div className='text-3xl font-bold'>
                 How would you rate McDonald's?
             </div>
@@ -20,15 +20,15 @@ export const RATING_C_PAGE = [
                 3. Price Levels
             </div>
         </div>
-        <div id="steps-container" class="mt-auto py-10">
-            <ul class="steps">
-                <li class="step step-success"></li>
-                <li class="step step-success"></li>
-                <li class="step step-success"></li>
-                <li class="step step-success"></li>
-                <li class="step step-success"></li>
-                <li class="step step-success"></li>
-                <li class="step"></li>
+        <div id="steps-container" className="mt-auto py-10">
+            <ul className="steps">
+                <li className="step step-success"></li>
+                <li className="step step-success"></li>
+                <li className="step step-success"></li>
+                <li className="step step-success"></li>
+                <li className="step step-success"></li>
+                <li className="step step-success"></li>
+                <li className="step"></li>
             </ul>
         </div>
     </div>,

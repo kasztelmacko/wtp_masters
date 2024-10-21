@@ -15,7 +15,7 @@ const FormWrapper = ({ onSubmit, onNext, isLastPage, children }) => {
         </div>
         <div className='flex justify-center p-10'>
             {isLastPage ? (
-                <button type="submit" className='btn btn-success'>Submit</button>
+                <button type="submit" className='btn btn-success'>Next</button>
             ) : (
                 <button type="button" onClick={onNext} className='btn btn-success'>Next</button>
             )}

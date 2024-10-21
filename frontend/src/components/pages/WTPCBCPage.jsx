@@ -13,7 +13,6 @@ const WTPCBCPage = ({ onSubmit, responderId }) => {
         const fetchQuestions = async () => {
             try {
                 const response = await axios.get(`http://127.0.0.1:8000/api/cbc-wtp-questions?respondent_id=${responderId}`);
-                console.log('Fetched questions:', response.data);
 
                 if (Array.isArray(response.data.data)) {
                     setQuestions(response.data.data);
@@ -45,9 +44,7 @@ const WTPCBCPage = ({ onSubmit, responderId }) => {
             }, {});
 
         try {
-            console.log('Payload being sent:', {WTPCBCQuestions, responder_id: responderId});
             const response = await axios.post('http://127.0.0.1:8000/api/cbc-wtp-questions', {WTPCBCQuestions, responder_id: responderId});
-            console.log(response.data);
             onSubmit();
         } catch (error) {
             console.error("Error posting consumer behavior questions:", error);

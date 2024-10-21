@@ -1,8 +1,8 @@
 import React from 'react';
 
 export const AHP_PAGE = [
-    <div class="flex flex-col items-center justify-center h-full bg-bg-primary col-span-3">
-        <div className="flex-grow" key="0">
+    <div className="flex flex-col items-center justify-center h-full bg-bg-primary col-span-3">
+        <div className="flex-grow" key="3">
             <div>
                 This part of the study is trying to find your priorities and preferences for decision-making when you deal with a new unknown product/brand.
             </div>
@@ -30,15 +30,15 @@ export const AHP_PAGE = [
             </div>
             <br />
         </div>
-        <div id="steps-container" class="mt-auto py-10">
-            <ul class="steps">
-                <li class="step step-success"></li>
-                <li class="step step-success"></li>
-                <li class="step step-success"></li>
-                <li class="step step-success"></li>
-                <li class="step"></li>
-                <li class="step"></li>
-                <li class="step"></li>
+        <div id="steps-container" className="mt-auto py-10">
+            <ul className="steps">
+                <li className="step step-success"></li>
+                <li className="step step-success"></li>
+                <li className="step step-success"></li>
+                <li className="step step-success"></li>
+                <li className="step"></li>
+                <li className="step"></li>
+                <li className="step"></li>
             </ul>
         </div>
     </div>,

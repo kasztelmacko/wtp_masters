@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const MAIN_PAGE = [
-    <div class="flex flex-col items-center justify-center h-full bg-bg-primary col-span-3">
+    <div className="flex flex-col items-center justify-center h-full bg-bg-primary col-span-3">
         <div className="flex-grow" key="0">
             <div>
             You will take part in a study on the determinants of how much people are willing to pay for meals in new a fast food brand.
@@ -30,15 +30,15 @@ export const MAIN_PAGE = [
             Each section presents a task on the <span className="font-bold">left</span> side and corresponding questions to answer on the <span className="font-bold">right</span>.
             </div>
         </div>
-        <div id="steps-container" class="mt-auto py-10">
-            <ul class="steps">
-                <li class="step step-success"></li>
-                <li class="step"></li>
-                <li class="step"></li>
-                <li class="step"></li>
-                <li class="step"></li>
-                <li class="step"></li>
-                <li class="step"></li>
+        <div id="steps-container" className="mt-auto py-10">
+            <ul className="steps">
+                <li className="step step-success"></li>
+                <li className="step"></li>
+                <li className="step"></li>
+                <li className="step"></li>
+                <li className="step"></li>
+                <li className="step"></li>
+                <li className="step"></li>
             </ul>
         </div>
     </div>,

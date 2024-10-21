@@ -81,9 +81,7 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, frequenc
     };
 
     try {
-      console.log('Payload being sent:', payload);
       const response = await axios.post('http://127.0.0.1:8000/api/demographic-questions', payload);
-      console.log('Response:', response.data);
     } catch (error) {
       console.error('Error sending question:', error);
     }
@@ -91,7 +89,7 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, frequenc
 
   return (
     <FormWrapper onSubmit={handleSubmit} isLastPage={true}>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Age Input */}
         <div className="w-full p-2">
           <InputQuestion
@@ -130,10 +128,10 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, frequenc
             value={income}
             onChange={(e) => setIncome(e.target.value)}
             options={[
-              { value: 'under_20k', label: 'Under $20,000' },
-              { value: '20k_50k', label: '$20,000 - $50,000' },
-              { value: '50k_100k', label: '$50,000 - $100,000' },
-              { value: 'over_100k', label: 'Over $100,000' },
+              { value: 'under_1k', label: 'Under 1000 zł monthly' },
+              { value: 'under_5k', label: '1000 - 5000 zł monthly' },
+              { value: 'under_10k', label: '5000 - 10 000 zł monthly' },
+              { value: 'over_10k', label: 'Over 10 000 zł monthly' },
             ]}
             required={true}
           />
@@ -180,11 +178,10 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, frequenc
             value={monthly_spenditure_on_fast_food}
             onChange={(e) => setMonthlySpenditureOnFastFood(e.target.value)}
             options={[
-              { value: "$0 - $50", label: "$0 - $50" },
-              { value: "$51 - $100", label: "$51 - $100" },
-              { value: "$101 - $200", label: "$101 - $200" },
-              { value: "$201 - $300", label: "$201 - $300" },
-              { value: "$301+", label: "$301+" }
+              { value: "to_50", label: "0 - 50 zł monthly" },
+              { value: "51_100", label: "51 - 100 zł monthly" },
+              { value: "101_200", label: "101 - 200 zł monthly" },
+              { value: "over_200", label: "more than 200 zł monthly" },
             ]}
             required={true}
           />

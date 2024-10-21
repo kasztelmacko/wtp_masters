@@ -2,6 +2,7 @@ from supabase import Client, create_client
 from dotenv import load_dotenv
 import os
 from typing import List
+from datetime import datetime
 
 load_dotenv()
 
@@ -45,9 +46,13 @@ def get_free_respondent_ids():
     return response
 
 def change_respondent_status(respondent_id: int, status: str):
-    response = supabase.table("respondent_ids").update({"status": status}) \
-        .eq("respondent_id", respondent_id) \
-        .execute()
+    current_timestamp = datetime.utcnow().isoformat()
+    response = supabase.table("respondent_ids").update({
+        "status": status,
+        "change_timestampz": current_timestamp
+    }) \
+    .eq("respondent_id", respondent_id) \
+    .execute()
     return response
 
 def assign_free_respondent_id():
@@ -55,7 +60,6 @@ def assign_free_respondent_id():
     if response.data:
         free_ids = [resp['respondent_id'] for resp in response.data]
         responder_id = min(free_ids)
-        print("responder", responder_id)
         
         change_respondent_status(responder_id, "active")
         

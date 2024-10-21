@@ -18,20 +18,14 @@ const MarketAwarenessPage = ({ inputRefs, recognizedCompetitors = [], setRecogni
             }
         };
 
-        console.log('Responder ID:', responderId);
 
         try {
-            console.log('Payload being sent:', {
-                ...MarketAwarenessQuestions,
-                responder_id: responderId
-            });
             const response = await axios.post('http://127.0.0.1:8000/api/market-awareness-questions', {
                 ...MarketAwarenessQuestions,
                 responder_id: responderId
             }, {
                 withCredentials: true
             });
-            console.log(response.data);
         } catch (error) {
             console.error("Error posting market awareness questions:", error);
         }

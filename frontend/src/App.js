@@ -92,17 +92,16 @@ function App() {
 
   useEffect(() => {
     const fetchResponderId = async () => {
-      try {
-        const response = await axios.get('http://127.0.0.1:8000/api/assign-responder-id', { withCredentials: true });
-        setResponderId(response.data.responder_id);
-        console.log('Responder ID:', response.data.responder_id);
-      } catch (error) {
-        console.error("Error fetching responder ID:", error);
-      }
+        try {
+            const response = await axios.get('http://127.0.0.1:8000/api/assign-responder-id', { withCredentials: true });
+            setResponderId(response.data.responder_id);
+        } catch (error) {
+            console.error("Error fetching responder ID:", error);
+        }
     };
 
     fetchResponderId();
-  }, []);
+}, []);
 
   return (
     <div className="flex flex-col lg:flex-row h-full">
@@ -262,9 +261,7 @@ function App() {
         )}
 
         {currentPage === 10 && (
-          <div className="flex items-center justify-center h-full text-gray-700">
-            <h1 className="text-3xl font-bold">Thank You for Your Time!</h1>
-          </div>
+          <div></div>
         )}
       </div>
     </div>

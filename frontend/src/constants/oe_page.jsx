@@ -1,8 +1,8 @@
 import React from 'react';
 
 export const OE_PAGE = [
-    <div class="flex flex-col items-center justify-center h-full bg-bg-primary col-span-3">
-        <div className="flex-grow" key="0">
+    <div className="flex flex-col items-center justify-center h-full bg-bg-primary col-span-3">
+        <div className="flex-grow" key="4">
             <div>
                 This part of the study is asking directly about how much would you be willing to pay for a certain fast food product.
             </div>
@@ -28,15 +28,15 @@ export const OE_PAGE = [
             provide your answers in zł (PLN).
             </div>
         </div>
-        <div id="steps-container" class="mt-auto py-10">
-            <ul class="steps">
-                <li class="step step-success"></li>
-                <li class="step step-success"></li>
-                <li class="step step-success"></li>
-                <li class="step step-success"></li>
-                <li class="step"></li>
-                <li class="step"></li>
-                <li class="step"></li>
+        <div id="steps-container" className="mt-auto py-10">
+            <ul className="steps">
+                <li className="step step-success"></li>
+                <li className="step step-success"></li>
+                <li className="step step-success"></li>
+                <li className="step step-success"></li>
+                <li className="step"></li>
+                <li className="step"></li>
+                <li className="step"></li>
             </ul>
         </div>
     </div>,

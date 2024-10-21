@@ -74,9 +74,7 @@ const AHPPage = ({ onSubmit, responderId }) => {
     const finalAnswers = saveCurrentAnswer();
 
     try {
-      console.log('Payload being sent:', { responder_id: responderId, ...finalAnswers }); // Include responderId
       const response = await axios.post('http://127.0.0.1:8000/api/ahp-questions', { responder_id: responderId, ...finalAnswers });
-      console.log('Response from server:', response.data);
       onSubmit();
     } catch (error) {
       console.error('Error sending questions:', error);
