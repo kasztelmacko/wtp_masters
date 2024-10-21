@@ -27,7 +27,7 @@ export const MAIN_PAGE = [
             <div>7. Questionnaire in which you rate new fast food brand based on your expectations,</div>
             <br />
             <div>
-            Each section presents a task on the <span className="font-bold">left</span> side and corresponding questions to answer on the <span className="font-bold">right</span>.
+            Each section presents a task and corresponding questions to answer.
             </div>
         </div>
         <div id="steps-container" className="mt-auto py-10">
