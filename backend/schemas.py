@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 from typing import Dict
-from question_types import (SingleChoiceQuestion, 
-                            MultipleChoiceQuestion, 
+from question_types import (SingleChoiceQuestion,  
                             OpinionScaleQuestion, 
                             InputQuestion,
                             AHPChoiceQuestion, 
@@ -52,7 +51,7 @@ class NewBrandExpectationQuestions(BaseModel):
 
 class MarketAwarenessQuestions(BaseModel):
     responder_id: int
-    recognized_competitors: MultipleChoiceQuestion
+    recognized_competitors: InputQuestion
 
 class GuessPricesQuestion(BaseModel):
     responder_id: int

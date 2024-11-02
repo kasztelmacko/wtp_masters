@@ -143,11 +143,11 @@ async def newbrand_rating(newbrand_rating: NewBrandExpectationQuestions):
 
 @app.post("/api/market-awareness-questions")
 async def market_awareness(market_awareness: MarketAwarenessQuestions):
-
+    print(market_awareness)
     responder_id = market_awareness.responder_id
     
     response = {
-        "recognized_competitors": len(market_awareness.recognized_competitors.validate_serialize_response(market_awareness.recognized_competitors.question_text)) / 14
+        "recognized_competitors": market_awareness.recognized_competitors.validate_serialize_response(market_awareness.recognized_competitors.question_text)
     }
 
     values, columns = get_values_and_columns(response)

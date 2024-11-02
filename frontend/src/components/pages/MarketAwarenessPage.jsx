@@ -1,64 +1,83 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
-import MultipleChoiceQuestion from '../questions/MultipleChoiceQuestion';
+import InputQuestion from '../questions/InputQuestion';
 import FormWrapper from '../FormWrapper';
 
-const MarketAwarenessPage = ({ inputRefs, recognizedCompetitors = [], setRecognizedCompetitors, responderId, onSubmit }) => {
+const MarketAwarenessPage = ({ recognizedCompetitors = [], setRecognizedCompetitors, responderId, onSubmit }) => {
+    const inputRef = useRef(null);
+    const [inputValue, setInputValue] = useState('');
+
+    const handleInputChange = (e) => {
+        setInputValue(e.target.value);
+    };
+
+    const addCompetitor = () => {
+        if (inputValue.trim() !== '') {
+            setRecognizedCompetitors([...recognizedCompetitors, inputValue.trim()]);
+            setInputValue('');
+        }
+    };
+
     const handleSubmit = async () => {
         onSubmit();
 
+        // Preparing the payload
         const MarketAwarenessQuestions = {
-            recognized_competitors: {
-                question_name: inputRefs.recognized_competitors.current.id,
-                question_text: recognizedCompetitors,
-                required: inputRefs.recognized_competitors.current.required,
-                choices: Array.from(inputRefs.recognized_competitors.current.options)
-                    .map(option => option.value)
-                    .filter(value => value !== ''),
-            }
+            input_type: inputRef.current.type,
+            question_name: inputRef.current.id,
+            question_text: recognizedCompetitors.join(','),
+            required: inputRef.current.required,
+            choices: [],
         };
 
+        const payload = {
+            responder_id: responderId,
+            recognized_competitors: MarketAwarenessQuestions,
+        };
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/market-awareness-questions', {
-                ...MarketAwarenessQuestions,
-                responder_id: responderId
-            }, {
+            const response = await axios.post('http://127.0.0.1:8000/api/market-awareness-questions', payload, {
                 withCredentials: true
             });
+
         } catch (error) {
             console.error("Error posting market awareness questions:", error);
+            console.error("Response data:", error.response?.data);
         }
-    }
+    };
 
     return (
         <FormWrapper onSubmit={handleSubmit} isLastPage={true}>
-            <MultipleChoiceQuestion 
-                ref={inputRefs.recognized_competitors}
-                id="recognized_competitors"
-                label="Which fast food brands you recognize?"
-                selectedValues={recognizedCompetitors}
-                onChange={setRecognizedCompetitors}
-                options={[
-                    { value: "McDonald's", label: "McDonald's" },
-                    { value: "Burger King", label: "Burger King" },
-                    { value: "Subway", label: "Subway" },
-                    { value: "Taco Bell", label: "Taco Bell" },
-                    { value: "KFC", label: "KFC" },
-                    { value: "Wendy's", label: "Wendy's" },
-                    { value: "Dunkin'", label: "Dunkin'" },
-                    { value: "Shake Shack", label: "Shake Shack" },
-                    { value: "Chick-fil-A", label: "Chick-fil-A" },
-                    { value: "Five Guys", label: "Five Guys" },
-                    { value: "In-N-Out Burger", label: "In-N-Out Burger" },
-                    { value: "Popeyes", label: "Popeyes" },
-                    { value: "Carl's Jr.", label: "Carl's Jr." },
-                    { value: "Arby's", label: "Arby's" }
-                ]}
-                required={false}
-            />
+            <div className="flex flex-col h-full">
+                {recognizedCompetitors.length > 0 && (
+                    <ul className="list-disc pl-5 my-4 space-y-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:space-y-0">
+                        {recognizedCompetitors.map((competitor, index) => (
+                            <li key={index} className="badge badge-outline text-gray-700 w-4/5">{competitor}</li>
+                        ))}
+                    </ul>
+                )}
+                <div className="mt-8 grid grid-cols-5 gap-4 content-end">
+                    <div className="col-span-4">
+                        <InputQuestion
+                            ref={inputRef}
+                            id="recognized_competitors"
+                            label="Which fast food brands do you recognize?"
+                            value={inputValue}
+                            onChange={handleInputChange}
+                            type="text"
+                            required={false}
+                            className="w-full"
+                        />
+                    </div>
+                    <div className="col-span-1 self-end">
+                        <button type="button" onClick={addCompetitor} className='btn btn-success w-full'>
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
         </FormWrapper>
     );
-}
+};
 
 export default MarketAwarenessPage;

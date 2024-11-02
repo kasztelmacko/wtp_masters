@@ -33,14 +33,6 @@ class SingleChoiceQuestion(Question):
             return False
         return True
 
-class MultipleChoiceQuestion(Question):
-    choices: List[str]
-
-    def validate_response(self, response: List[str]) -> bool:
-        if self.required and not all(choice in self.choices for choice in response):
-            return False
-        return True
-
 class InputQuestion(Question):
     input_type: str
 

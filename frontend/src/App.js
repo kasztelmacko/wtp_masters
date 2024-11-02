@@ -29,7 +29,7 @@ function App() {
   const [nb_prices, setNPrices] = useState(0);
 
   // New state for MarketAwarenessPage
-  const [recognizedCompetitors, setRecognizedCompetitors] = useState([]);
+  const [recognizedCompetitors, setRecognizedCompetitors] = useState('');
 
   // New state for GuessPricesPage
   const [burger, setBurger] = useState("");
