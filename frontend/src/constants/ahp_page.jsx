@@ -20,12 +20,12 @@ export const AHP_PAGE = [
             </div>
             <div>
                 <ul className="list-disc pl-5">
-                    <li><span className="font-bold">Brand recognition:</span> How well you know the brand.</li>
-                    <li><span className="font-bold">Brand recall:</span> How easily you remember the brand.</li>
+                    <li><span className="font-bold">Brand recognition:</span> Rembering the brand without any ads, logo, slogan.</li>
+                    <li><span className="font-bold">Brand recall:</span> Recognizing brand based on its ads, logo, slogan.</li>
                     <li><span className="font-bold">Brand past purchase or use:</span> Whether you have bought or used the brand before.</li>
                     <li><span className="font-bold">Emotional perception of the brand:</span> How the brand makes you feel.</li>
-                    <li><span className="font-bold">Logo:</span> The brand's visual symbol.</li>
-                    <li><span className="font-bold">Utilitarian benefits:</span> Practical advantages of the brand.</li>
+                    <li><span className="font-bold">Logo:</span> Your liking of the brand's visual symbol.</li>
+                    <li><span className="font-bold">Utilitarian benefits:</span> Benefits that brands profits provide.</li>
                 </ul>
             </div>
             <br />

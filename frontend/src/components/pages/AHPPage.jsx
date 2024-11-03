@@ -74,7 +74,7 @@ const AHPPage = ({ onSubmit, responderId }) => {
     const finalAnswers = saveCurrentAnswer();
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/ahp-questions', { responder_id: responderId, ...finalAnswers });
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/ahp-questions`, { responder_id: responderId, ...finalAnswers });
       onSubmit();
     } catch (error) {
       console.error('Error sending questions:', error);

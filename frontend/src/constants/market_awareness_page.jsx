@@ -3,17 +3,13 @@ import React from 'react';
 export const MARKET_AWARENESS_PAGE = [
     <div className="flex flex-col items-center justify-center h-full bg-bg-primary col-span-3">
         <div className="flex-grow text-gray-700 mb-4 text-start" key="1">
-            <div>
-            This is a list of existing fast food brands.
-            </div>
-            <div>
-            Not all operate in Poland.
-            </div>
-            <br />
-            <div className="font-bold text-3xl">Which fast food brands do you recognize?</div>
+            <div className="font-bold text-3xl">What fast food brands do you know?</div>
             <br />
             <div>
-            Check the boxes of those you do.
+            Type names of fast food brands you know and press Add button.
+            </div>
+            <div>
+            If you dont know any more click Next
             </div>
         </div>
         <div id="steps-container" className="mt-auto py-10">

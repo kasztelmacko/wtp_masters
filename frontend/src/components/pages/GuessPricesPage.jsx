@@ -42,7 +42,7 @@ const GuessPricesPage = ({ inputRefs, burger, burger_premium, bundle, setBurger,
         }, {});
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/guess-prices-questions', { responder_id: responderId, ...GuessPricesQuestions });
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/guess-prices-questions`, { responder_id: responderId, ...GuessPricesQuestions });
         } catch (error) {
             console.error('Error sending question:', error);
         }

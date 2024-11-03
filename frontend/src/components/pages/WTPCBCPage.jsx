@@ -44,7 +44,7 @@ const WTPCBCPage = ({ onSubmit, responderId }) => {
             }, {});
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/cbc-wtp-questions', {WTPCBCQuestions, responder_id: responderId});
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/cbc-wtp-questions`, {WTPCBCQuestions, responder_id: responderId});
             onSubmit();
         } catch (error) {
             console.error("Error posting consumer behavior questions:", error);

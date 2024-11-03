@@ -93,7 +93,7 @@ function App() {
   useEffect(() => {
     const fetchResponderId = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/assign-responder-id', { withCredentials: true });
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/assign-responder-id`, { withCredentials: true });
             setResponderId(response.data.responder_id);
         } catch (error) {
             console.error("Error fetching responder ID:", error);

@@ -49,7 +49,7 @@ const RatingPage = ({ inputRefs, taste, atmosphere, prices, setTaste, setAtmosph
         }, {});
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000' + api, { responder_id: responderId, ...RatingQuestions });
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}` + api, { responder_id: responderId, ...RatingQuestions });
         } catch (error) {
             console.error("Error posting consumer behavior questions:", error);
         }

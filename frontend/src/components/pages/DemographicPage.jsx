@@ -81,7 +81,7 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, frequenc
     };
     
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/demographic-questions', payload);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/demographic-questions`, payload);
     } catch (error) {
       console.error('Error sending question:', error);
     }

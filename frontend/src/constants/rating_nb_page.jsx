@@ -7,16 +7,16 @@ export const RATING_NB_PAGE = [
                 What are your expectations towards Wendy's?
             </div>
             <br />
-            <div className='text-3xl font-bold'>
+            <div className='text-xl font-bold'>
                 Give your expectation a rating on a 1-5 scale:
             </div>
-            <div className='text-3xl font-bold'>
+            <div className='text-xl font-bold'>
                 1. Taste
             </div>
-            <div className='text-3xl font-bold'>
+            <div className='text-xl font-bold'>
                 2. Atmosphere
             </div>
-            <div className='text-3xl font-bold'>
+            <div className='text-xl font-bold'>
                 3. Price Levels
             </div>
         </div>

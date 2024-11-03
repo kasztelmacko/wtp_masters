@@ -88,7 +88,7 @@ const WTPDirectPage = ({
         };
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/direct-wtp-questions', WTPDirectQuestions);
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/direct-wtp-questions`, WTPDirectQuestions);
         } catch (error) {
             console.error('Error sending question:', error);
         }
