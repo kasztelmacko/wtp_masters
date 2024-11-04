@@ -4,7 +4,7 @@ export const MAIN_PAGE = [
     <div className="flex flex-col items-center justify-center h-full bg-bg-primary col-span-3">
         <div className="flex-grow" key="0">
             <div>
-            You will take part in a study on the determinants of how much people are willing to pay for meals in new a fast food brand.
+            You will be asked questions concerning fast food brands.
             </div>
             <br />
             <div>
@@ -15,16 +15,8 @@ export const MAIN_PAGE = [
             </div>
             <br />
             <div>
-            The survey consists of <span className="font-bold">7 parts</span>:
+            The survey consists of <span className="font-bold">7 parts</span> and asks about your preferences, choices and factors influencing your decisions.
             </div>
-            <div>1. Questionnaire about your demographics and characteristics,</div>
-            <div>2. Questionnaire about your knowledge of fast food brands,</div>
-            <div>3. Questionnaire in which you guess the prices of known fast food products,</div>
-            <div>4. Questionnaire about your priorities and preferences for decision-making,</div>
-            <div>5. Questionnaire about your willingness to pay (Direct),</div>
-            <div>5. Questionnaire about your willingness to pay (Indirect),</div>
-            <div>6. Questionnaire in which you rate known fast food brand, </div>
-            <div>7. Questionnaire in which you rate new fast food brand based on your expectations,</div>
             <br />
             <div>
             Each section presents a task and corresponding questions to answer.

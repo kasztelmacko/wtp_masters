@@ -7,16 +7,19 @@ export const RATING_C_PAGE = [
                 How would you rate McDonald's?
             </div>
             <br />
-            <div className='text-xl font-bold'>
+            <div className='text-l'>
                 Rate McDonald's restaurant on a 1-5 scale:
             </div>
-            <div className='text-xl font-bold'>
+            <div>
+                (1 - very bad, 5 - very good)
+            </div>
+            <div className='text-l'>
                 1. Taste
             </div>
-            <div className='text-xl font-bold'>
+            <div className='text-l'>
                 2. Atmosphere
             </div>
-            <div className='text-xl font-bold'>
+            <div className='text-l'>
                 3. Price Levels
             </div>
         </div>

@@ -74,7 +74,7 @@ const RatingPage = ({ inputRefs, taste, atmosphere, prices, setTaste, setAtmosph
                     <OpinionScaleQuestion
                         ref={inputRefs.atmosphere}
                         id="atmosphere"
-                        label="How do you fell about the restaurant?"
+                        label="How do you like the atmosphere of the restaurant?"
                         value={atmosphere}
                         onChange={(e) => setAtmosphere(e.target.value)}
                         required

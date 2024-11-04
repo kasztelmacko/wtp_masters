@@ -6,10 +6,10 @@ export const MARKET_AWARENESS_PAGE = [
             <div className="font-bold text-3xl">What fast food brands do you know?</div>
             <br />
             <div>
-            Type names of fast food brands you know and press Add button.
+            Type fast food brand name and press <span className="font-bold">Add</span> button.
             </div>
             <div>
-            If you dont know any more click Next
+            If you dont know any more click <span className="font-bold">Next</span>
             </div>
         </div>
         <div id="steps-container" className="mt-auto py-10">

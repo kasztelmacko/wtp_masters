@@ -13,17 +13,19 @@ const CBCQuestion = forwardRef(({ id, label, selectedValue, onChange, options, r
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-4 gap-16 w-full">
             {sortedOptions.map(option => (
                 <div 
-                    className={`h-full w-full relative group flex flex-col border rounded-lg border-gray-300 min-w-[180px] max-w-[360px] lg:max-w-[240px] xl:max-w-[360px]`}
+                    className={`h-full w-full relative group flex flex-col border rounded-lg border-gray-300 min-w-[180px] max-w-[360px] lg:max-w-[240px] xl:max-w-[360px] cursor-pointer`}
                     onClick={() => onChange(option.value)}
                     key={option.value} 
                 >
-                    <div className={`transition duration-300 ease-in-out transform hover:translate-y-[-4px] hover:shadow-lg flex flex-col h-full ${selectedValue === option.value ? 'bg-zinc-200 shadow-xl' : 'bg-white'} ${option.no_choice ? 'bg-red-500' : ''}`}>
+                    <div className={`transition duration-300 ease-in-out transform hover:translate-y-[-4px] hover:shadow-lg flex flex-col h-full ${selectedValue === option.value ? 'bg-zinc-200 shadow-xl' : 'bg-white'}`}>
                         {!option.no_choice ? (
                             <div className="h-full w-full flex flex-col">
                                 <div className="h-48 w-full flex justify-center items-center">
                                     <figure>
-                                        <img src={option.img_url}  
-                                        className="max-w-full max-h-full object-contain" 
+                                        <img 
+                                            src={option.img_url} 
+                                            className="max-w-full max-h-full object-contain" 
+                                            alt={option.item_name} 
                                         />
                                     </figure>
                                 </div>
@@ -36,21 +38,22 @@ const CBCQuestion = forwardRef(({ id, label, selectedValue, onChange, options, r
                                     </p>
                                 </div>
                                 <div className="mt-auto w-full">
-                                    <div className="bg-red-500 text-white text-xs font-semibold p-2 rounded-md grid grid-cols-3 gap-4 items-center justify-items-center">
-                                        <div className="text-center">
+                                    <div className="bg-red-500 text-white text-xs font-semibold p-2 rounded-md flex items-center justify-between h-16">
+                                        <div className="flex-1 text-center">
                                             <div>{option.portion_size} g</div>
                                             <div>{option.calories} kcal</div>
                                         </div>
-                                        <div className="text-center ">
-                                            <div className="w-8 rounded">
+                                        <div className="flex-1 text-center">
+                                            <div className="w-8 rounded mx-auto">
                                                 <img
-                                                src="https://kkpcuktyelbwgigadulx.supabase.co/storage/v1/object/public/item_photos/wendys-logo-6.png?t=2024-11-02T12%3A17%3A11.521Z"
-                                                alt="wendy's logo" />
+                                                    src="https://kkpcuktyelbwgigadulx.supabase.co/storage/v1/object/public/item_photos/wendys-logo-6.png?t=2024-11-02T12%3A17%3A11.521Z"
+                                                    alt="wendy's logo" 
+                                                />
                                             </div>
                                         </div>
-                                        <div className="text-center">
+                                        <div className="flex-1 text-center">
                                             <div className="text-2xl font-bold tracking-tight text-white">
-                                                {option.price} <span className="text-xl">zł</span>
+                                                {option.price}&nbsp;<span className="text-xl">zł</span>
                                             </div>
                                         </div>
                                     </div>
@@ -66,8 +69,8 @@ const CBCQuestion = forwardRef(({ id, label, selectedValue, onChange, options, r
                                 />
                             </div>
                         ) : (
-                            <div className="flex-grow flex items-center justify-center text-white text-2xl font-bold bg-red-500">
-                                No Choice
+                            <div className="flex-grow flex items-center justify-center text-center text-gray-900 text-2xl font-bold p-4">
+                                No option attracts me
                             </div>
                         )}
                     </div>

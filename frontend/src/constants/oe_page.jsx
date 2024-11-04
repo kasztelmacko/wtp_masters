@@ -4,21 +4,7 @@ export const OE_PAGE = [
     <div className="flex flex-col items-center justify-center h-full bg-bg-primary col-span-3">
         <div className="flex-grow" key="4">
             <div>
-                This part of the study is asking directly about how much would you be willing to pay for a certain fast food product.
-            </div>
-            <br />
-            <div>
-                You will see <span className="font-bold">3 products</span> for which you need to answer the following questions:
-            </div>
-            <br />
-            <div>
-                <ol className="list-decimal pl-5 font-bold">
-                    <li>At what price would you consider this burger so expensive that you would not consider buying it?</li><br />
-                    <li>At what price would you consider this burger so inexpensive that you would feel the quality could not be very good and you would not consider buying it?</li><br />
-                    <li>At what price would you consider the burger was becoming expensive and although not out of question?</li><br />
-                    <li>At what price would you consider the burger a bargain - a great buy for the money?</li><br />
-                    <li>What would the market price without any discounts be?</li>
-                </ol>
+                You will see <span className="font-bold">3 products</span> for which you need to answer the questions below:
             </div>
             <br />
             <div>

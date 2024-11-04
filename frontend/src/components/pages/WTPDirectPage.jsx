@@ -142,7 +142,7 @@ const WTPDirectPage = ({
     
                 {/* Input Questions */}
                 <div>
-                    <p>At what price would you consider this burger so expensive that you <span className="font-bold">would not</span> consider buying it?</p>
+                    <p>At what price would this product be <span className="font-bold">too expensive</span> to buy for you?</p>
                     <InputQuestion
                         ref={inputRefs[`${item}_wtp_UpperT`]}
                         id={`${item}_wtp_UpperT`}
@@ -153,7 +153,7 @@ const WTPDirectPage = ({
                         onChange={(e) => setUpperT(e.target.value)}
                     />
                     
-                    <p>At what price would you consider this burger so <span className="font-bold">inexpensive</span> that you would feel the quality could not be very good and you would not consider buying it?</p>
+                    <p>At what price would this product be <span className="font-bold">to cheap</span> to buy (you think it's quality could be low)?</p>
                     <InputQuestion
                         ref={inputRefs[`${item}_wtp_LowerT`]}
                         id={`${item}_wtp_LowerT`}
@@ -164,7 +164,7 @@ const WTPDirectPage = ({
                         onChange={(e) => setLowerT(e.target.value)}
                     />
                     
-                    <p>At what price would you consider the burger was becoming <span className="font-bold">expensive and although not out of question</span>?</p>
+                    <p>At what price would this product become <span className="font-bold">a bit expensive</span> but not out of question?</p>
                     <InputQuestion
                         ref={inputRefs[`${item}_wtp_upperB`]}
                         id={`${item}_wtp_upperB`}
@@ -186,7 +186,7 @@ const WTPDirectPage = ({
                         onChange={(e) => setLowerb(e.target.value)}
                     />
                     
-                    <p>What would the <span className="font-bold">market</span> price without any discounts be?</p>
+                    <p>What could be <span className="font-bold">the real price of the product</span> without any discounts?</p>
                     <InputQuestion
                         ref={inputRefs[`${item}_wtp_guess`]}
                         id={`${item}_wtp_guess`}

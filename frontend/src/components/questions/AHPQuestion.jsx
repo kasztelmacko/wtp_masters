@@ -1,18 +1,18 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import SingleChoiceQuestion from './SingleChoiceQuestion';
 
-const AHPQuestion = forwardRef(({ criteria, id, required }, ref) => {
+const AHPQuestion = forwardRef(({ sentence, id, required }, ref) => {
   const [selectedOption, setSelectedOption] = useState('');
 
   useImperativeHandle(ref, () => ({
     id,
     value: selectedOption,
-    criteria
+    sentence
   }));
 
   return (
     <div className='flex flex-col items-start text-3xl w-full max-w-md mx-auto'>
-      <h2 className='text-gray-700 font-bold mb-4 text-start'>{criteria[0]} is</h2>
+      <h2 className='text-gray-700 font-bold mb-4 text-start'>{sentence[0]} is</h2>
       <div className='w-full mb-4'>
         <SingleChoiceQuestion
           id={id}
@@ -33,7 +33,7 @@ const AHPQuestion = forwardRef(({ criteria, id, required }, ref) => {
           required={required}
         />
       </div>
-      <h2 className='text-gray-700 font-bold mb-4 text-start'>{criteria[1]}</h2>
+      <h2 className='text-gray-700 font-bold mb-4 text-start'>{sentence[1]}</h2>
     </div>
   );
 });

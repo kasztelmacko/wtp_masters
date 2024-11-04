@@ -11,8 +11,13 @@ SUPABASE_SECRET_KEY = os.getenv("SUPABASE_SECRET_KEY")
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_SECRET_KEY)
 
-def get_data(table_name: str, respondent_id: int, column: str = None):
-    response = supabase.table(table_name).select(column if column else "*").eq("respondent_id", respondent_id).execute()
+def get_data(table_name: str, respondent_id: int = None, column: str = None):
+    query = supabase.table(table_name).select(column if column else "*")
+    
+    if respondent_id is not None:
+        query = query.eq("respondent_id", respondent_id)
+        
+    response = query.execute()
     return response
 
 def save_choices(table_name: str, respondent_id: int, alternative_id: int, question_id: int):

@@ -8,7 +8,7 @@ export const GUESS_PRICE_PAGE = [
             </div>
             <br />
             <div className='font-bold text-3xl'>
-            How much do each of those items costs in the restaurant?
+            How much does each of those items cost in restaurant?
             </div>
             <br />
             <div>
