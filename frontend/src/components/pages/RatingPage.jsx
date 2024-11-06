@@ -3,7 +3,7 @@ import axios from 'axios';
 import OpinionScaleQuestion from '../questions/OpinionScaleQuestion';
 import FormWrapper from '../FormWrapper';
 
-const RatingPage = ({ inputRefs, taste, atmosphere, prices, setTaste, setAtmosphere, setPrices, api, onSubmit, responderId }) => {
+const RatingPage = ({ inputRefs, taste, prices, setTaste, setPrices, api, onSubmit, responderId }) => {
     const min_value = 0;
     const max_value = 4;
 
@@ -16,14 +16,6 @@ const RatingPage = ({ inputRefs, taste, atmosphere, prices, setTaste, setAtmosph
                 question_name: inputRefs.taste.current.id,
                 question_text: parseFloat(taste),
                 required: inputRefs.taste.current.required,
-                min_value: min_value,
-                max_value: max_value,
-            },
-            {
-                key: 'atmosphere',
-                question_name: inputRefs.atmosphere.current.id,
-                question_text: parseFloat(atmosphere),
-                required: inputRefs.atmosphere.current.required,
                 min_value: min_value,
                 max_value: max_value,
             },
@@ -65,18 +57,6 @@ const RatingPage = ({ inputRefs, taste, atmosphere, prices, setTaste, setAtmosph
                         label="How would you rate the food taste?"
                         value={taste}
                         onChange={(e) => setTaste(e.target.value)}
-                        required
-                        min_value={min_value}
-                        max_value={max_value}
-                    />
-                </div>
-                <div className="w-3/4">
-                    <OpinionScaleQuestion
-                        ref={inputRefs.atmosphere}
-                        id="atmosphere"
-                        label="How do you like the atmosphere of the restaurant?"
-                        value={atmosphere}
-                        onChange={(e) => setAtmosphere(e.target.value)}
                         required
                         min_value={min_value}
                         max_value={max_value}

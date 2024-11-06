@@ -21,9 +21,6 @@ export const RATING_NB_PAGE = [
                 1. Taste
             </div>
             <div className='text-l'>
-                2. Atmosphere
-            </div>
-            <div className='text-l'>
                 3. Price Levels
             </div>
         </div>

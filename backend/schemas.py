@@ -40,13 +40,11 @@ class AHPQuestions(BaseModel):
 class CompetitorRatingQuestions(BaseModel):
     responder_id: int
     taste: OpinionScaleQuestion
-    atmosphere: OpinionScaleQuestion
     prices: OpinionScaleQuestion
 
 class NewBrandExpectationQuestions(BaseModel):
     responder_id: int
     taste: OpinionScaleQuestion
-    atmosphere: OpinionScaleQuestion
     prices: OpinionScaleQuestion
 
 class MarketAwarenessQuestions(BaseModel):

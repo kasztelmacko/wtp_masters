@@ -20,12 +20,10 @@ function App() {
 
   // New state for CompetitorRatingPage
   const [competitor_taste, setCTaste] = useState(0);
-  const [competitor_atmosphere, setCAtmosphere] = useState(0);
   const [competitor_prices, setCPrices] = useState(0);
 
   // New state for NewBrandRatingPage
   const [nb_taste, setNTaste] = useState(0);
-  const [nb_atmosphere, setNAtmosphere] = useState(0);
   const [nb_prices, setNPrices] = useState(0);
 
   // New state for MarketAwarenessPage
@@ -54,7 +52,6 @@ function App() {
     monthly_spenditure_on_fast_food: useRef(null),
 
     taste: useRef(null),
-    atmosphere: useRef(null),
     prices: useRef(null),
 
     recognized_competitors: useRef(null),
@@ -143,10 +140,8 @@ function App() {
         <RatingPage 
           inputRefs={inputRefs}
           taste={competitor_taste}
-          atmosphere={competitor_atmosphere}
           prices={competitor_prices}
           setTaste={setCTaste}
-          setAtmosphere={setCAtmosphere}
           setPrices={setCPrices}
           api={"/api/competitor-rating-questions"}
           responderId={responderId}
@@ -159,10 +154,8 @@ function App() {
         <RatingPage 
           inputRefs={inputRefs}
           taste={nb_taste}
-          atmosphere={nb_atmosphere}
           prices={nb_prices}
           setTaste={setNTaste}
-          setAtmosphere={setNAtmosphere}
           setPrices={setNPrices}
           api={"/api/newbrand-rating-questions"}
           responderId={responderId}

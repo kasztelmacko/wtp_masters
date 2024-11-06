@@ -114,7 +114,6 @@ async def competitor_rating(competitor_rating: CompetitorRatingQuestions):
     
     response = {
         "competitor_taste": competitor_rating.taste.validate_serialize_response(competitor_rating.taste.question_text),
-        "competitor_atmosphere": competitor_rating.atmosphere.validate_serialize_response(competitor_rating.atmosphere.question_text),
         "competitor_prices": competitor_rating.prices.validate_serialize_response(competitor_rating.prices.question_text)
     }
 
@@ -130,7 +129,6 @@ async def newbrand_rating(newbrand_rating: NewBrandExpectationQuestions):
     
     response = {
         "new_brand_taste": newbrand_rating.taste.validate_serialize_response(newbrand_rating.taste.question_text),
-        "new_brand_atmosphere": newbrand_rating.atmosphere.validate_serialize_response(newbrand_rating.atmosphere.question_text),
         "new_brand_prices": newbrand_rating.prices.validate_serialize_response(newbrand_rating.prices.question_text)
     }
 
