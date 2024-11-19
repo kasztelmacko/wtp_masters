@@ -1,19 +1,18 @@
-
 services:
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "8080:8080"
     working_dir: /app/frontend
-    command: ["serve", "-s", "build"]
+    command: ["serve", "-s", "build", "-l", "8080"]
 
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "8080:8080"
     working_dir: /app/backend
-    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]

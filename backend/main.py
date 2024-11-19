@@ -26,7 +26,7 @@ from database.supabase_sql import (get_data,
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://192.168.56.1:3000"],
+    allow_origins=["https://frontend.wafl.ovh"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
