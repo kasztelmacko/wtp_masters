@@ -81,24 +81,11 @@ function App() {
   };
 
   const handleNextPage = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
-    if (currentPage === 10) {
-      setCurrentPage(10);
-    }
+    setCurrentPage(currentPage + 1);
   };
-
-  useEffect(() => {
-    const fetchResponderId = async () => {
-        try {
-            const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/assign-responder-id`, { withCredentials: true });
-            setResponderId(response.data.responder_id);
-        } catch (error) {
-            console.error("Error fetching responder ID:", error);
-        }
-    };
-
-    fetchResponderId();
-}, []);
+  const handleResponderIdFetch = (newResponderId) => {
+    setResponderId(newResponderId);
+  };
 
   return (
     <div className="flex flex-col lg:flex-row h-full">
@@ -123,6 +110,7 @@ function App() {
           setMonthlySpenditureOnFastFood={setMonthlySpenditureOnFastFood}
           responderId={responderId}
           onSubmit={handleNextPage}
+          onResponderIdFetch={handleResponderIdFetch}
         />
         )}
 

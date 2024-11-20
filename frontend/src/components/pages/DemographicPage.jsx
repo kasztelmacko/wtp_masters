@@ -4,9 +4,21 @@ import InputQuestion from '../questions/InputQuestion';
 import SingleChoiceQuestion from '../questions/SingleChoiceQuestion';
 import FormWrapper from '../FormWrapper';
 
-const DemographicPage = ({ inputRefs, age, gender, income, geolocation, frequency_of_fast_food_dining, monthly_spenditure_on_fast_food, setAge, setGender, setIncome, setGeolocation, setFrequencyOfFastFoodDining, setMonthlySpenditureOnFastFood, responderId, onSubmit }) => {
+const DemographicPage = ({ inputRefs, age, gender, income, geolocation, frequency_of_fast_food_dining, monthly_spenditure_on_fast_food, setAge, setGender, setIncome, setGeolocation, setFrequencyOfFastFoodDining, setMonthlySpenditureOnFastFood, responderId, onSubmit, onResponderIdFetch }) => {
   const handleSubmit = async () => {
-    onSubmit(); 
+    let id = responderId;
+
+    if (!responderId) {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/assign-responder-id`, { withCredentials: true });
+        id = response.data.responder_id;
+        onResponderIdFetch(id);
+      } catch (error) {
+        console.error("Error fetching responder ID:", error);
+        return;
+      }
+    }
+    onSubmit();
 
     const questionsConfig = [
       {
@@ -76,7 +88,7 @@ const DemographicPage = ({ inputRefs, age, gender, income, geolocation, frequenc
 
     // Include responderId in the payload
     const payload = {
-      responder_id: responderId,
+      responder_id: id,
       ...inputQuestions
     };
     

@@ -141,7 +141,6 @@ async def newbrand_rating(newbrand_rating: NewBrandExpectationQuestions):
 
 @app.post("/api/market-awareness-questions")
 async def market_awareness(market_awareness: MarketAwarenessQuestions):
-    print(market_awareness)
     responder_id = market_awareness.responder_id
     
     response = {

@@ -12,7 +12,7 @@ const WTPCBCPage = ({ onSubmit, responderId }) => {
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/cbc-wtp-questions?respondent_id=${responderId}`);
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/cbc-wtp-questions?respondent_id=${responderId}`);
 
                 if (Array.isArray(response.data.data)) {
                     setQuestions(response.data.data);
