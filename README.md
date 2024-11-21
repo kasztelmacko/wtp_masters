@@ -15,4 +15,4 @@ This project was written to run a survey for my Masters Thesis, as I haven't fou
 - frontend: React
 - deployed: docker image on Google Cloud Run
 
-*the page survey can be accesed on ``wafl.ovh``
+*the page survey can be accesed on ``frontend.wafl.ovh``
